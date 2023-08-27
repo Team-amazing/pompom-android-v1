@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "1068138307418",
+    "firebase_url": "https://autopompomme-default-rtdb.firebaseio.com",
+    "project_id": "autopompomme",
+    "storage_bucket": "autopompomme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068138307418:android:8c107ded179b7d0f8d5d63",
+        "android_client_info": {
+          "package_name": "com.amazing.android.autopompomme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC45qqY0-IEuD7p0iVXBhfFKYcoqOVIxt4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068138307418:android:710062384e0a85058d5d63",
+        "android_client_info": {
+          "package_name": "com.example.outopompomme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC45qqY0-IEuD7p0iVXBhfFKYcoqOVIxt4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
