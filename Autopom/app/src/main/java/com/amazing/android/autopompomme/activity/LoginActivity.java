@@ -2,6 +2,10 @@ package com.amazing.android.autopompomme.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
 
+    private EditText email, password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,31 +35,57 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        binding.btnLoginLogin.setOnClickListener(v -> logIn());
+        email = binding.etLoginEmail;
+        password = binding.etLoginPassword;
+
+        checkTextInput();
     }
 
-    private void logIn() {
-        String email = binding.etLoginEmail.getText().toString();
-        String password = binding.etLoginPassword.getText().toString();
+    private void checkTextInput() {
+        TextWatcher textWatcher =  new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        if (email.length() > 0 && password.length() > 0) {
-            binding.btnLoginLogin.setEnabled(true);
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                startToast("로그인에 성공했습니다.");
-                                myStartActivity(MainActivity.class);
-                            } else {
-                                if (task.getException() != null) {
-                                    startToast(task.getException().toString());
-                                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String email = binding.etLoginEmail.getText().toString().trim();
+                String password = binding.etLoginPassword.getText().toString().trim();
+
+                binding.btnLoginLogin.setEnabled(!email.isEmpty()&&!password.isEmpty());
+
+                binding.btnLoginLogin.setOnClickListener(v -> logIn(email, password));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        };
+        email.addTextChangedListener(textWatcher);
+        password.addTextChangedListener(textWatcher);
+
+    }
+
+    private void logIn(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            startToast("로그인에 성공했습니다.");
+                            myStartActivity(MainActivity.class);
+                        } else {
+                            if (task.getException() != null) {
+                                startToast(task.getException().toString());
+                                Log.d("TEST","예외"+task.getException().toString());
                             }
                         }
-                    });
-        }
+                    }
+                });
     }
 
     private void startToast(String msg) {
