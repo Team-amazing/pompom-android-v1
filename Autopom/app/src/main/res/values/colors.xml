@@ -6,4 +6,6 @@
     <color name="main2">#99F3BD</color>
     <color name="main3">#D2F6C5</color>
     <color name="main4">#F6F7D4</color>
+    <color name="red">#FF0000</color>
+    <color name="light_gray">#D3D3D3</color>
 </resources>

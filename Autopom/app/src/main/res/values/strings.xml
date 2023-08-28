@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Autopom</string>
+    <string name="set_profile_detail">프로필 정보(사진, 닉네임)는 회원 식별, 커뮤니티\n동의목적으로 활용되며, 팜팜이이용기간동안 보관됩니다</string>
 </resources>
