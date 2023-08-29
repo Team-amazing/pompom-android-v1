@@ -18,13 +18,13 @@
             android:name=".linking.LinkingActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SetProfileActivity"
+            android:name=".activity.StartActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.StartActivity"
+            android:name=".activity.SetProfileActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,7 @@
             android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true" />
     </application>
 
