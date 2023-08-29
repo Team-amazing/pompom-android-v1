@@ -54,22 +54,44 @@
     
     <EditText
         android:id="@+id/et_setProfile"
-        android:layout_width="300dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:hint="닉네임을 입력해주세요"
         android:textColor="@color/black"
         android:layout_marginTop="40dp"
-        app:layout_constraintLeft_toLeftOf="@id/iv_setProfile"
         app:layout_constraintRight_toRightOf="@id/iv_setProfile"
         app:layout_constraintTop_toBottomOf="@id/iv_setProfile"/>
 
+    <Button
+        android:id="@+id/btn_setProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="중복확인"
+        android:backgroundTint="@color/main1"
+        app:layout_constraintLeft_toRightOf="@id/et_setProfile"
+        app:layout_constraintBottom_toBottomOf="@id/et_setProfile"/>
+
     <TextView
+        android:id="@+id/tv_setProfile_notAble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="다른 사용자가 사용중이에요"
         android:textSize="15sp"
         android:textColor="@color/red"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/et_setProfile"
+        app:layout_constraintTop_toBottomOf="@id/et_setProfile"/>
+
+    <TextView
+        android:id="@+id/tv_setProfile_able"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사용할 수 있는 닉네임이에요"
+        android:textSize="15sp"
+        android:visibility="gone"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="@id/et_setProfile"
         app:layout_constraintTop_toBottomOf="@id/et_setProfile"/>
 
