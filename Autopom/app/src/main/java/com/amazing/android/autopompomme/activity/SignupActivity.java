@@ -37,7 +37,14 @@ public class SignupActivity extends AppCompatActivity {
         password = binding.etSignupPassword;
         passwordCheck = binding.etSignupPasswordCheck;
 
+        binding.tvLoginGoSignup.setOnClickListener(v -> gotoLogin());
+
         checkTextInput();
+    }
+
+    private void gotoLogin() {
+        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     private void checkTextInput() {
