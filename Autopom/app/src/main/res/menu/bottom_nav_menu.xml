@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/baseline_home_24"
+        android:title="홈"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/function"
+        android:enabled="true"
+        android:icon="@drawable/baseline_local_florist_24"
+        android:title="기능"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/community"
+        android:enabled="true"
+        android:icon="@drawable/baseline_comment_24"
+        android:title="커뮤니티"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/baseline_person_24"
+        android:title="프로필"
+        app:showAsAction="always"/>
+
+</menu>
