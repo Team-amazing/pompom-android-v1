@@ -60,9 +60,10 @@ public class MainActivity extends AppCompatActivity {
             if (fragment != null) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-
                 transaction.replace(R.id.containers, fragment)
                         .commit();
+
+                return true;
             }
             return false;
         });
