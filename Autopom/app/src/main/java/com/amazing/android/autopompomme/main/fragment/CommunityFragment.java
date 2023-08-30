@@ -12,10 +12,10 @@ import com.amazing.android.autopompomme.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Community#newInstance} factory method to
+ * Use the {@link CommunityFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Community extends Fragment {
+public class CommunityFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class Community extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Community() {
+    public CommunityFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class Community extends Fragment {
      * @return A new instance of fragment Community.
      */
     // TODO: Rename and change types and number of parameters
-    public static Community newInstance(String param1, String param2) {
-        Community fragment = new Community();
+    public static CommunityFragment newInstance(String param1, String param2) {
+        CommunityFragment fragment = new CommunityFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
