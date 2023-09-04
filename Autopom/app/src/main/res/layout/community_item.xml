@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_community"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/default_image_profile"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_community_userId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kevin"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/iv_community"
+        app:layout_constraintTop_toTopOf="@+id/iv_community"
+        app:layout_constraintBottom_toBottomOf="@id/iv_community"/>
+
+    <TextView
+        android:id="@+id/tv_community_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1주전"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_community_userId"
+        app:layout_constraintBottom_toBottomOf="@id/tv_community_userId"/>
+
+    <ImageView
+        android:id="@+id/iv_community_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_community"/>
+
+    <TextView
+        android:id="@+id/tv_community_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="팜팜이는 멈추지 않고 자란다"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_community_line"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_community"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="@id/iv_community_line"
+        app:layout_constraintRight_toRightOf="@id/iv_community_line"
+        app:layout_constraintTop_toBottomOf="@id/tv_community_title"/>
+
+    <TextView
+        android:id="@+id/tv_community_detail"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="이 편지는 영국에서 최초로 시작되어 일년에 한 바퀴 돌면서 받는 사람에게 행운을 주었고 지금은 당신에게로 옮겨진 "
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@id/vp_community"
+        app:layout_constraintRight_toRightOf="@id/vp_community"
+        app:layout_constraintTop_toBottomOf="@id/vp_community"/>
+    
+    <ImageView
+        android:id="@+id/iv_community_line1"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/radius"
+        android:backgroundTint="@color/light_gray"
+        app:layout_constraintLeft_toLeftOf="@id/tv_community_detail"
+        app:layout_constraintRight_toRightOf="@id/tv_community_detail"
+        app:layout_constraintTop_toBottomOf="@id/tv_community_detail"/>
+
+    <TextView
+        android:id="@+id/tv_community_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="138명이 하트를 보냈어요"
+        android:textSize="10sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/iv_community_line1"
+        app:layout_constraintTop_toBottomOf="@id/iv_community_line1"/>
+
+    <TextView
+        android:id="@+id/tv_community_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="댓글 42개"
+        android:textColor="@color/black"
+        android:textSize="8sp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_community_like"
+        app:layout_constraintTop_toBottomOf="@id/tv_community_like"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:text="좋아요"
+        android:drawableLeft="@drawable/baseline_favorite_border_24"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:background="@drawable/like_background"
+        android:textColor="@color/main2"
+        android:textSize="10sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintRight_toRightOf="@id/iv_community_line1"
+        app:layout_constraintTop_toBottomOf="@id/iv_community_line1" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/light_gray"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
