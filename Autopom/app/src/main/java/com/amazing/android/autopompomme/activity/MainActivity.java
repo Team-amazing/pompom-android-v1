@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     private void initializeFragments() {
         fragments.put(R.id.home, homeFragment);
         fragments.put(R.id.function, functionFragment);
@@ -62,7 +64,24 @@ public class MainActivity extends AppCompatActivity {
 
                 transaction.replace(R.id.containers, fragment)
                         .commit();
+            /*if (fragment != null) {
+                FragmentManager childFragmentManager = fragment.getChildFragmentManager();
 
+                if(fragment.isAdded()){
+                    FragmentTransaction transaction = childFragmentManager.beginTransaction();
+                    transaction.replace(R.id.containers, fragment)
+                            .commit();
+                }
+
+
+                /*if (fragment instanceof HomeFragment) {
+                    fragment.getChildFragmentManager().beginTransaction().replace(R.id.containers, fragment)
+                            //.addToBackStack(null)
+                            .commit();
+                } else {
+                    transaction.replace(R.id.containers, fragment)
+                            .commit();
+                }*/
                 return true;
             }
             return false;
