@@ -56,11 +56,14 @@ public class MainActivity extends AppCompatActivity {
     private void initBottomNavigation() {
         BottomNavigationView bottomNavigationView = binding.bottomNav;
 
+        fragmentManager.beginTransaction().replace(R.id.containers, homeFragment).commit();
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment fragment = fragments.get(item.getItemId());
 
             if (fragment != null) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+
 
                 transaction.replace(R.id.containers, fragment)
                         .commit();
