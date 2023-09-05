@@ -49,6 +49,8 @@ public class HomeFragment extends Fragment {
         viewPager.setClipToPadding(false);
         viewPager.setClipChildren(false);
 
+        viewPager.setSaveEnabled(false);
+
         viewPager.setOffscreenPageLimit(1);
 
 
