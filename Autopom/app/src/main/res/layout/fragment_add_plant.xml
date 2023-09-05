@@ -9,7 +9,7 @@
     app:cardElevation="10dp"
     app:strokeColor="@color/main2"
     app:cardUseCompatPadding="true"
-    tools:context=".main.home.AddPlantFragment">
+    tools:context=".fragment.AddPlantFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
