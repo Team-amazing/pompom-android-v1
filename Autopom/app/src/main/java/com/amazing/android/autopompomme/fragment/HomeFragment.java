@@ -1,6 +1,6 @@
 package com.amazing.android.autopompomme.main.fragment;
 
-import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,14 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.databinding.FragmentHomeBinding;
-import com.amazing.android.autopompomme.main.home.MyPlantAdapter;
+import com.amazing.android.autopompomme.adapter.MyPlantAdapter;
 
 
 public class HomeFragment extends Fragment {
@@ -51,10 +50,12 @@ public class HomeFragment extends Fragment {
         viewPager.setClipChildren(false);
 
         viewPager.setOffscreenPageLimit(1);
+
+
         viewPager.setPageTransformer(new ViewPager2.PageTransformer() {
             @Override
             public void transformPage(@NonNull View page, float position) {
-                viewPager.setTranslationX(position * offsetPx);
+                //viewPager.setTranslationX(position * offsetPx);
 
                 int currentPagePosition = viewPager.getCurrentItem();
                 Log.d("TEST","pos"+currentPagePosition);
@@ -63,21 +64,40 @@ public class HomeFragment extends Fragment {
                 float scaleFactorAbs = Math.abs(scaleFactor - Math.abs(position));
                 float alpha = Math.max(alphaFactor, scaleFactorAbs);
 
-                if (position == currentPagePosition - 1 || position == currentPagePosition + 1) {
-                    //page.setVisibility(View.INVISIBLE);
-
-
-                    page.setScaleX(1.0f);
-                    page.setScaleY(1.0f);
-                    page.setAlpha(1);
-
-                } else {
+                if(position == 1.0){
                     page.setVisibility(View.VISIBLE);
 
 
                     page.setScaleX(scaleFactor);
                     page.setScaleY(scaleFactor);
                     page.setAlpha(alpha);
+
+
+                }else {
+                    page.setVisibility(View.VISIBLE);
+
+                    page.setScaleX(1.0f);
+                    page.setScaleY(1.0f);
+                    page.setAlpha(1);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        int animationDurationMillis = viewPager.getResources().getInteger(android.R.integer.config_mediumAnimTime); // 애니메이션 지속 시간 설정 (여기서는 중간 정도로 설정)
+                        page.animate()
+                                .scaleX(1f)
+                                .scaleY(1f)
+                                .alpha(1f)
+                                .setDuration(animationDurationMillis)
+                                .start();
+                    }
+                }
+                if (position == currentPagePosition - 1 || position == currentPagePosition + 1) {
+                    //page.setVisibility(View.INVISIBLE);
+
+
+
+
+                } else {
+
 
 
                 }
