@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.linking;
+package com.amazing.android.autopompomme.activity;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;

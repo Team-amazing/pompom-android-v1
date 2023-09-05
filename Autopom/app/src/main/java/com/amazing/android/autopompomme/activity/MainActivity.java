@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.main;
+package com.amazing.android.autopompomme.activity;
 
 import android.os.Bundle;
 
@@ -9,10 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.databinding.ActivityMainBinding;
-import com.amazing.android.autopompomme.main.fragment.CommunityFragment;
-import com.amazing.android.autopompomme.main.fragment.FunctionFragment;
-import com.amazing.android.autopompomme.main.fragment.HomeFragment;
-import com.amazing.android.autopompomme.main.fragment.ProfileFragment;
+import com.amazing.android.autopompomme.fragment.CommunityFragment;
+import com.amazing.android.autopompomme.fragment.FunctionFragment;
+import com.amazing.android.autopompomme.fragment.HomeFragment;
+import com.amazing.android.autopompomme.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;

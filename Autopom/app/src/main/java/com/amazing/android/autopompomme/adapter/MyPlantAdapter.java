@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.main.home;
+package com.amazing.android.autopompomme.adapter;
 
 import android.util.Log;
 
@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.amazing.android.autopompomme.main.fragment.HomeFragment;
+import com.amazing.android.autopompomme.fragment.HomeFragment;
+import com.amazing.android.autopompomme.fragment.AddPlantFragment;
+import com.amazing.android.autopompomme.fragment.MyPlantFragment;
 
 import java.util.ArrayList;
 import java.util.List;

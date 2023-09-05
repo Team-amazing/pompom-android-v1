@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amazing.android.autopompomme.api.MemberInfo;
-import com.amazing.android.autopompomme.databinding.ActivitySetProfileBinding;
-import com.amazing.android.autopompomme.linking.LinkingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
