@@ -21,6 +21,7 @@ public class MyPlantAdapter extends FragmentStateAdapter {
         fragments = new ArrayList<>();
         fragments.add(new AddPlantFragment());
         fragments.add(new MyPlantFragment());
+        fragments.add(new MyPlantFragment());
         Log.d("TEST","in");
     }
 
