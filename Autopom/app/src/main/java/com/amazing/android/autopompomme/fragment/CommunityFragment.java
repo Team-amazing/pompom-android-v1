@@ -9,9 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.amazing.android.autopompomme.R;
-import com.amazing.android.autopompomme.activity.WriteActivity;
 import com.amazing.android.autopompomme.databinding.FragmentCommunityBinding;
+import com.amazing.android.autopompomme.write.WriteActivity;
 
 
 public class CommunityFragment extends Fragment {
