@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.WriteActivity">
+    tools:context=".write.WriteActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_write"
@@ -24,6 +24,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/tv_write_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="완료"
@@ -50,6 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="제목"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:background="@null"
         app:layout_constraintStart_toStartOf="@id/iv_write_line"
         app:layout_constraintEnd_toEndOf="@id/iv_write_line"
@@ -69,18 +72,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_write"
         android:layout_width="330dp"
-        android:layout_height="320dp"
-        android:background="@drawable/radius"
-        android:backgroundTint="@color/light_gray"
+        android:layout_height="350dp"
+        android:background="@drawable/like_background"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/iv_write_cutLine"
         app:layout_constraintEnd_toEndOf="@id/iv_write_cutLine"
         app:layout_constraintTop_toBottomOf="@id/iv_write_cutLine">
 
     <EditText
+        android:id="@+id/et_write_detail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textColor="@color/black"
         android:hint="식물에 대한 내용을 작성해 주세요"
         android:layout_marginTop="20dp"
@@ -92,6 +95,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
+            android:id="@+id/tv_write_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0/500"
@@ -115,6 +119,7 @@
         app:layout_constraintTop_toBottomOf="@id/cl_write"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_write_picture"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/camera_background"
@@ -127,5 +132,15 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/iv_write_line1"
         app:layout_constraintTop_toBottomOf="@id/iv_write_line1"/>
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        tools:listitem="@layout/write_img_item"
+        app:layout_constraintStart_toStartOf="@id/btn_write_picture"
+        app:layout_constraintTop_toBottomOf="@id/btn_write_picture"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
