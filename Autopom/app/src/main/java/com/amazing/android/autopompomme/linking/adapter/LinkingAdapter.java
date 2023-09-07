@@ -1,22 +1,38 @@
 package com.amazing.android.autopompomme.adapter;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazing.android.autopompomme.R;
+import com.amazing.android.autopompomme.linking.LinkingDialog;
+import com.amazing.android.autopompomme.linking.Listener;
 
 import java.util.ArrayList;
 
 public class LinkingAdapter extends RecyclerView.Adapter<LinkingAdapter.ViewHolder> {
-    private ArrayList<String> list;
+    private ArrayAdapter<String> nameAdapter;
+    private ArrayList<String> deviceAddress;
+    private Context context;
+    private Listener listener;
 
 
+    public interface OnItemClickListener {
+        void onItemClicked(int position, String data);
+    }
+
+    private OnItemClickListener itemClickListener;
+
+    public void setItemClickListener (OnItemClickListener listener) {
+        itemClickListener = listener;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,9 +48,12 @@ public class LinkingAdapter extends RecyclerView.Adapter<LinkingAdapter.ViewHold
 
     }
 
-    public LinkingAdapter (ArrayList<String> dataSet) {
+    public LinkingAdapter (Context context, ArrayAdapter<String> dataSet, ArrayList<String> deviceAddressArray, Listener listener) {
         Log.d("TEST","t/"+dataSet);
-        list = dataSet;
+        nameAdapter = dataSet;
+        this.context = context;
+        this.listener = listener;
+        this.deviceAddress = deviceAddressArray;
     }
 
     @NonNull
@@ -48,14 +67,20 @@ public class LinkingAdapter extends RecyclerView.Adapter<LinkingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull LinkingAdapter.ViewHolder holder, int position) {
-        String text = list.get(position);
-        holder.deviceName.setText(text);
+        String name = nameAdapter.getItem(position);
+        String device = deviceAddress.get(position);
+        holder.deviceName.setText(name);
+
+        LinkingDialog linkingDialog = new LinkingDialog(context, name,device,listener);
+        holder.deviceName.setOnClickListener(v -> {
+            linkingDialog.show();
+        });
     }
 
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return nameAdapter.getCount();
     }
 
 

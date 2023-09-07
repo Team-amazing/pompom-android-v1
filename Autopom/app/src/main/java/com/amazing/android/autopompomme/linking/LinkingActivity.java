@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,13 +25,17 @@ import android.widget.ArrayAdapter;
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.adapter.LinkingAdapter;
 import com.amazing.android.autopompomme.databinding.ActivityLinkingBinding;
+import com.amazing.android.autopompomme.linking.ConnectedThread;
+import com.amazing.android.autopompomme.linking.Listener;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class LinkingActivity extends AppCompatActivity {
+public class LinkingActivity extends AppCompatActivity implements Listener{
     ActivityLinkingBinding binding;
 
     private static final UUID BT_MODULE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // "random" unique identifier
@@ -40,6 +45,11 @@ public class LinkingActivity extends AppCompatActivity {
     BluetoothLeAdvertiser pairDevice;
     ArrayAdapter<String> btArrayAdapter;
     ArrayList<String> deviceAddressArray;
+    BluetoothSocket btSocket;
+
+    Listener listener;
+
+    ConnectedThread connectedThread;
 
     private final static int REQUEST_ENABLE_BT = 1;
 
@@ -52,6 +62,8 @@ public class LinkingActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        listener = this;
 
         if (!bluetoothAdapter.isEnabled()) {
             binding.btnLinking.setText("허용하러 가기");
@@ -107,11 +119,12 @@ public class LinkingActivity extends AppCompatActivity {
                     deviceAddressArray.add(deviceName);
                 }
 
-                LinkingAdapter linkingAdapter = new LinkingAdapter(deviceAddressArray);
+                LinkingAdapter linkingAdapter = new LinkingAdapter(context,btArrayAdapter,deviceAddressArray,listener);
                 binding.rvLinking.setAdapter(linkingAdapter);
             }
         }
     };
+
 
 
     @Override
@@ -286,7 +299,7 @@ public class LinkingActivity extends AppCompatActivity {
                         Log.d("TEST", "deviceName/" + deviceName);
                         Log.d("TEST", "deviceHardware/" + deviceHardwareAddres);
                         btArrayAdapter.addAll(deviceName);
-                        //deviceAddressArray.add(deviceHardwareAddres);                        deviceAddressArray.add(deviceHardwareAddres);
+                        deviceAddressArray.add(deviceHardwareAddres);
                         Log.d("TEST", "e/" + deviceAddressArray);
 
 
@@ -328,5 +341,33 @@ public class LinkingActivity extends AppCompatActivity {
             return;
         }
         startActivityForResult(intent, 1);
+    }
+
+    public void sendData(String name, String passWord) {
+
+    }
+
+    @Override
+    public void wifi(String wifiName, String wifiPw, String device) throws IOException {
+        btSocket = createBluetoothSocket(bluetoothAdapter.getRemoteDevice(device));
+        //btSocket = device.
+        connectedThread = new ConnectedThread(btSocket);
+        connectedThread.start();
+        Log.d("TEST","w"+wifiName);
+        if(connectedThread!= null) {
+            connectedThread.write(wifiName,wifiPw);
+        }
+    }
+
+    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+        try {
+            final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", UUID.class);
+            return (BluetoothSocket) m.invoke(device, BT_MODULE_UUID);
+        } catch (Exception e) {
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+
+        }
+        return device.createRfcommSocketToServiceRecord(BT_MODULE_UUID);
     }
 }
