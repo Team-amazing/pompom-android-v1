@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.adapter;
+package com.amazing.android.autopompomme.linking.adapter;
 
 import android.content.Context;
 import android.util.Log;

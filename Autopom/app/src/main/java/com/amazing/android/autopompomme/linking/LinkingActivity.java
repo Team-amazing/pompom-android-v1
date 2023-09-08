@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.activity;
+package com.amazing.android.autopompomme.linking;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -23,10 +23,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.amazing.android.autopompomme.R;
-import com.amazing.android.autopompomme.adapter.LinkingAdapter;
+import com.amazing.android.autopompomme.linking.adapter.LinkingAdapter;
 import com.amazing.android.autopompomme.databinding.ActivityLinkingBinding;
-import com.amazing.android.autopompomme.linking.ConnectedThread;
-import com.amazing.android.autopompomme.linking.Listener;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
