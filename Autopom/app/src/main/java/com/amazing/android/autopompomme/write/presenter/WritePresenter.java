@@ -27,15 +27,15 @@ public class WritePresenter implements WriteContract.Presenter{
         this.view = view;
     }
     @Override
-    public void write(String title, String detail) {
+    public void write(String title, String detail,Uri uri) {
         //api 코드
         //이미지 api
         reference = FirebaseStorage.getInstance().getReference();
 
-        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
-        StorageReference riversRef = reference.child("images/rivers.jpg");
+        //Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
+        StorageReference riversRef = reference.child("images/"+uri.getLastPathSegment());
 
-        riversRef.putFile(file)
+        riversRef.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -52,8 +52,9 @@ public class WritePresenter implements WriteContract.Presenter{
         //text api
         fireStore = FirebaseFirestore.getInstance();
         Map<String, Object> post = new HashMap<>();
-        post.put("title","postTitle");
-        post.put("content","postContent");
+        post.put("title",title);
+        post.put("content",detail);
+        Log.d("TEST","ti"+title);
 
         fireStore.collection("posts")
                 .add(post)
