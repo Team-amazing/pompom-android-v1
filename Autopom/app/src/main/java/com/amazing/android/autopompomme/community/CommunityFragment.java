@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.fragment;
+package com.amazing.android.autopompomme.community;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,6 +34,8 @@ public class CommunityFragment extends Fragment {
             Intent intent = new Intent(getActivity(), WriteActivity.class);
             startActivity(intent);
         });
+
+        
 
         return binding.getRoot();
     }
