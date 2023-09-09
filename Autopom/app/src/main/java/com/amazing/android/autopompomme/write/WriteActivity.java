@@ -35,6 +35,8 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
 
     private int imgCount =0;
 
+    private Uri uri;
+
     EditText title,detail;
 
     private WriteContract.Presenter presenter;
@@ -70,21 +72,14 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
             }
         });
 
+        binding.tvWriteComplete.setOnClickListener( v -> presenter.write(title.getText().toString(),detail.getText().toString(),uri));
+
 
 
         checkTextInput(etTitle, etDetail);
     }
 
-    private void checkInside(String title, String detail) {
-        if(title.length() == 0 || detail.length() == 0){
-            binding.tvWriteComplete.setClickable(false);
-            binding.tvWriteComplete.setTextColor(Color.parseColor("#D9D9D9"));
-        }else {
-            binding.tvWriteComplete.setClickable(true);
-            binding.tvWriteComplete.setTextColor(Color.parseColor("#28DF99"));
-            //binding.tvWriteComplete.setOnClickListener(v -> presenter.write(title, detail));
-        }
-    }
+
 
     private void checkTextInput(String titles, String details) {
         TextWatcher textWatcher =  new TextWatcher() {
@@ -95,16 +90,9 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d("TEST","uri/"+uri);
 
-                if(title.length() == 0 || detail.length() == 0){
-                    binding.tvWriteComplete.setClickable(false);
-                    binding.tvWriteComplete.setTextColor(Color.parseColor("#D9D9D9"));
-                }else {
-                    binding.tvWriteComplete.setClickable(true);
-                    binding.tvWriteComplete.setTextColor(Color.parseColor("#28DF99"));
-                    //binding.tvWriteComplete.setOnClickListener(v -> presenter.write(title, detail));
-                }
-                //binding.tvWriteComplete.setEnabled(!titles.isEmpty()&&!details.isEmpty());
+                checkInside();
             }
 
             @Override
@@ -133,7 +121,7 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
 
 
         if(requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
+            uri = data.getData();
             Log.d("TEST","uri"+uri);
             imgUrls.add(data.getData().toString());
             WriteAdapter writeAdapter= new WriteAdapter(this,imgUrls);
@@ -145,6 +133,8 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
             binding.btnWritePicture.setText(imgCount+"/5");
             String[] filePathColum = {MediaStore.Images.Media.DATA};
 
+            checkInside();
+
             Cursor cursor = getContentResolver().query(uri,filePathColum,null,null,null);
             cursor.moveToFirst();
 
@@ -152,6 +142,17 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
             cursor.close();
 
 
+        }
+    }
+
+    private void checkInside() {
+        if(title.length() == 0 || detail.length() == 0 || uri == null){
+            binding.tvWriteComplete.setClickable(false);
+            binding.tvWriteComplete.setTextColor(Color.parseColor("#D9D9D9"));
+        }else {
+            binding.tvWriteComplete.setClickable(true);
+            binding.tvWriteComplete.setTextColor(Color.parseColor("#28DF99"));
+            //binding.tvWriteComplete.setOnClickListener(v -> presenter.write(title, detail));
         }
     }
 }
