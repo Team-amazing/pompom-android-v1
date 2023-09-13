@@ -1,6 +1,8 @@
 package com.amazing.android.autopompomme.community;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,14 @@ import com.amazing.android.autopompomme.R;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
 
     private ArrayList<CommunityList> arrayList;
+    private List<RecyclerViewItem> recyclerViewItems;
     private Context context;
 
     public CommunityAdapter(ArrayList<CommunityList> arrayList, Context context) {
@@ -74,6 +78,12 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         holder.detail.setText(arrayList.get(position).getContent());
         holder.tvLike.setText(arrayList.get(position).getLikeNum()+"명이 하트를 보냈어요");
         holder.comment.setText("댓글 "+arrayList.get(position).getCommentNum()+"개");
+
+        List<String> imgUri = arrayList.get(position).getPostUri();
+        //RecyclerViewItem item = recyclerViewItems.get(position);
+        Log.d("TEST","s"+imgUri);
+        PostImgAdapter adapter = new PostImgAdapter(context, imgUri);
+        holder.pager.setAdapter(adapter);
     }
 
     @Override
