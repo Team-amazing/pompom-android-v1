@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.databinding.ActivityMainBinding;
-import com.amazing.android.autopompomme.fragment.CommunityFragment;
+import com.amazing.android.autopompomme.community.CommunityFragment;
 import com.amazing.android.autopompomme.fragment.FunctionFragment;
 import com.amazing.android.autopompomme.fragment.HomeFragment;
 import com.amazing.android.autopompomme.fragment.ProfileFragment;
