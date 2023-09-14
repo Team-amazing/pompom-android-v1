@@ -24,7 +24,7 @@
             android:name=".write.WriteActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.LinkingActivity"
+            android:name=".linking.LinkingActivity"
             android:exported="false" />
         <activity
             android:name=".activity.StartActivity"
@@ -33,7 +33,7 @@
             android:name=".activity.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SetProfileActivity"
