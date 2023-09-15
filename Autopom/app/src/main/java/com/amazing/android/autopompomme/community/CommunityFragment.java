@@ -115,7 +115,7 @@ public class CommunityFragment extends Fragment {
 
                             Log.d("TEST","list"+arrayList);
                             //List<RecyclerViewItem> items = arrayList;
-                            CommunityAdapter communityAdapter = new CommunityAdapter(arrayList,getContext());
+                            CommunityAdapter communityAdapter = new CommunityAdapter(arrayList);
                             recyclerView.setAdapter(communityAdapter);
 
                         } else {
