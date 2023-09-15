@@ -1,10 +1,15 @@
 package com.amazing.android.autopompomme.community;
 
+import android.net.Uri;
+
+import java.util.List;
+
 public class CommunityList {
     private String profileName;
-    private String profile;
+    private Uri profileUri;
     private String date;
     private String title;
+    private List<String> postUri;
     private String content;
     private int likeNum;
     private int commentNum;
@@ -19,12 +24,12 @@ public class CommunityList {
         this.profileName = profileName;
     }
 
-    public String getProfile() {
-        return profile;
+    public Uri getProfile() {
+        return profileUri;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setProfile(Uri profile) {
+        this.profileUri = profileUri;
     }
 
     public String getDate() {
@@ -41,6 +46,14 @@ public class CommunityList {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<String> getPostUri() {
+        return postUri;
+    }
+
+    public void setPostUri(List<String> postUri) {
+        this.postUri = postUri;
     }
 
     public String getContent() {
