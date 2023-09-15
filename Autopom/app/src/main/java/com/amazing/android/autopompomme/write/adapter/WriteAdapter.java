@@ -1,6 +1,7 @@
 package com.amazing.android.autopompomme.write.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import java.util.List;
 public class WriteAdapter extends RecyclerView.Adapter<WriteAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> imgUrls;
+    private List<Uri> imgUrls;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -34,7 +35,7 @@ public class WriteAdapter extends RecyclerView.Adapter<WriteAdapter.ViewHolder> 
         }
     }
 
-    public WriteAdapter (Context context, List<String> imgUrls){
+    public WriteAdapter (Context context, List<Uri> imgUrls){
         this.context = context;
         this.imgUrls = imgUrls;
     }
@@ -47,7 +48,7 @@ public class WriteAdapter extends RecyclerView.Adapter<WriteAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull WriteAdapter.ViewHolder holder, int position) {
-        String imgUrl = imgUrls.get(position);
+        Uri imgUrl = imgUrls.get(position);
 
         Glide.with(context)
                 .load(imgUrl)
