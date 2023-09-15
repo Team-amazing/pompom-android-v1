@@ -24,12 +24,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
 
     private ArrayList<CommunityList> arrayList;
-    private List<RecyclerViewItem> recyclerViewItems;
-    private Context context;
 
-    public CommunityAdapter(ArrayList<CommunityList> arrayList, Context context) {
+    public CommunityAdapter(ArrayList<CommunityList> arrayList) {
         this.arrayList = arrayList;
-        this.context = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,7 +79,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         List<String> imgUri = arrayList.get(position).getPostUri();
         //RecyclerViewItem item = recyclerViewItems.get(position);
         Log.d("TEST","s"+imgUri);
-        PostImgAdapter adapter = new PostImgAdapter(context, imgUri);
+        PostImgAdapter adapter = new PostImgAdapter(imgUri);
         holder.pager.setAdapter(adapter);
     }
 
