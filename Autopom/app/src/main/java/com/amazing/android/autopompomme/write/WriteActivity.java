@@ -22,8 +22,12 @@ import com.amazing.android.autopompomme.databinding.ActivityWriteBinding;
 import com.amazing.android.autopompomme.write.adapter.WriteAdapter;
 import com.amazing.android.autopompomme.write.presenter.WriteContract;
 import com.amazing.android.autopompomme.write.presenter.WritePresenter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class WriteActivity extends AppCompatActivity implements WriteContract.View {
@@ -31,11 +35,15 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
     ActivityWriteBinding binding;
     private static final int GALLERY_REQUEST_CODE = 1;
     private RecyclerView recyclerView;
-    private List<String> imgUrls = new ArrayList<>();
+    private List<Uri> imgUrls = new ArrayList<>();
 
     private int imgCount =0;
 
     private Uri uri;
+
+    private String name;
+    private Uri profileUrl;
+    private String time;
 
     EditText title,detail;
 
@@ -72,13 +80,25 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
             }
         });
 
-        binding.tvWriteComplete.setOnClickListener( v -> presenter.write(title.getText().toString(),detail.getText().toString(),uri));
+        postData();
+        binding.tvWriteComplete.setOnClickListener( v -> presenter.write(name, profileUrl, time, title.getText().toString(),detail.getText().toString(),imgUrls));
 
 
 
         checkTextInput(etTitle, etDetail);
     }
 
+    private void postData() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        if(user!= null) {
+            name = user.getDisplayName();
+            profileUrl = user.getPhotoUrl();
+            time = format.format(date);
+        }
+    }
 
 
     private void checkTextInput(String titles, String details) {
@@ -117,13 +137,11 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.d("TEST","e"+data.getData());
-
-
         if(requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             uri = data.getData();
             Log.d("TEST","uri"+uri);
-            imgUrls.add(data.getData().toString());
+            imgUrls.add(data.getData());
+            Log.d("TEST","data"+imgUrls);
             WriteAdapter writeAdapter= new WriteAdapter(this,imgUrls);
             recyclerView.setAdapter(writeAdapter);
             //ImageView itemImageView = findViewById(R.id.iv_write_img);
