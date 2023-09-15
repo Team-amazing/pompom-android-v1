@@ -1,11 +1,15 @@
 package com.amazing.android.autopompomme.community;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.amazing.android.autopompomme.R;
+import com.amazing.android.autopompomme.community.detail.DetailActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -24,6 +29,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
 
     private ArrayList<CommunityList> arrayList;
+    private ViewGroup parent;
+    private int likeNum;
+    private int likeN;
+
 
     public CommunityAdapter(ArrayList<CommunityList> arrayList) {
         this.arrayList = arrayList;
@@ -39,6 +48,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         TextView detail;
         TextView tvLike;
         TextView comment;
+        AppCompatButton btnNoLike;
         AppCompatButton btnLike;
 
         public ViewHolder(@NonNull View itemView) {
@@ -52,6 +62,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             detail = itemView.findViewById(R.id.tv_community_detail);
             tvLike = itemView.findViewById(R.id.tv_community_like);
             comment = itemView.findViewById(R.id.tv_community_comment);
+            btnNoLike = itemView.findViewById(R.id.btn_community_defaultLike);
             btnLike = itemView.findViewById(R.id.btn_community_like);
         }
     }
@@ -61,6 +72,10 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     @Override
     public CommunityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.community_item,parent,false);
+        view.setOnClickListener(v -> {
+            //상세 화면 가기
+        });
+        this.parent = parent;
         return new ViewHolder(view);
     }
 
@@ -75,6 +90,22 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         holder.detail.setText(arrayList.get(position).getContent());
         holder.tvLike.setText(arrayList.get(position).getLikeNum()+"명이 하트를 보냈어요");
         holder.comment.setText("댓글 "+arrayList.get(position).getCommentNum()+"개");
+        likeNum = arrayList.get(position).getLikeNum();
+
+        holder.btnNoLike.setOnClickListener( v -> {
+            holder.btnNoLike.setVisibility(View.GONE);
+            holder.btnLike.setVisibility(View.VISIBLE);
+            likeNum += 1;
+            holder.tvLike.setText(likeNum +"이 하트를 보냈어요");
+        });
+
+        holder.btnLike.setOnClickListener( v -> {
+            holder.btnNoLike.setVisibility(View.VISIBLE);
+            holder.btnLike.setVisibility(View.GONE);
+            likeNum -= 1;
+            holder.tvLike.setText(likeNum+"이 하트를 보냈어요");
+
+        });
 
         List<String> imgUri = arrayList.get(position).getPostUri();
         //RecyclerViewItem item = recyclerViewItems.get(position);
