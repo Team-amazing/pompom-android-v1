@@ -5,6 +5,7 @@ import android.net.Uri;
 import java.util.List;
 
 public class CommunityList {
+    private String postId;
     private String profileName;
     private Uri profileUri;
     private String date;
@@ -15,6 +16,14 @@ public class CommunityList {
     private int commentNum;
 
     public CommunityList() {}
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
 
     public String getProfileName() {
         return profileName;
