@@ -1,6 +1,8 @@
 package com.amazing.android.autopompomme.community;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -109,13 +111,17 @@ public class CommunityFragment extends Fragment {
                                 Log.d("TEST", document.getId() + " => " + document.getData());
                                 //Log.d("TEST","ob"+document.toObject(CommunityList.class));
                                 CommunityList data = document.toObject(CommunityList.class);
-                                Log.d("TEST","da"+data);
+                                Log.d("TEST","da"+document);
+                                data.setPostId(document.getId());
                                 arrayList.add(data);
                             }
 
                             Log.d("TEST","list"+arrayList);
                             //List<RecyclerViewItem> items = arrayList;
-                            CommunityAdapter communityAdapter = new CommunityAdapter(arrayList);
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                            String userId = sharedPreferences.getString("userId", null);
+
+                            CommunityAdapter communityAdapter = new CommunityAdapter(arrayList,userId);
                             recyclerView.setAdapter(communityAdapter);
 
                         } else {
