@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("userId", uid);
                             editor.apply();
-                            
+
                             startToast("로그인에 성공했습니다.");
                             myStartActivity(MainActivity.class);
                         } else {
