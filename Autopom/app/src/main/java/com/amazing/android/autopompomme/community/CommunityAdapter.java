@@ -1,5 +1,6 @@
 package com.amazing.android.autopompomme.community;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.amazing.android.autopompomme.R;
+import com.amazing.android.autopompomme.activity.MainActivity;
+import com.amazing.android.autopompomme.community.detail.DetailActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -59,6 +63,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         TextView detail;
         TextView tvLike;
         TextView comment;
+        CardView cardView;
         AppCompatButton btnNoLike;
         AppCompatButton btnLike;
 
@@ -75,6 +80,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             comment = itemView.findViewById(R.id.tv_community_comment);
             btnNoLike = itemView.findViewById(R.id.btn_community_defaultLike);
             btnLike = itemView.findViewById(R.id.btn_community_like);
+            cardView = itemView.findViewById(R.id.cv_community);
         }
     }
 
@@ -118,6 +124,23 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         Log.d("TEST","s"+imgUri);
         PostImgAdapter adapter = new PostImgAdapter(imgUri);
         holder.pager.setAdapter(adapter);
+
+        holder.cardView.setOnClickListener( v -> {
+
+            Intent detailActivity = new Intent(v.getContext(), DetailActivity.class);
+
+            detailActivity.putExtra("title", arrayList.get(position).getTitle()); //제목
+            detailActivity.putExtra("profileImg", arrayList.get(position).getProfile());
+            detailActivity.putExtra("profileName", arrayList.get(position).getProfileName());
+            detailActivity.putExtra("time",arrayList.get(position).getDate());
+            detailActivity.putExtra("content",arrayList.get(position).getContent());
+            detailActivity.putExtra("likeNum",arrayList.get(position).getLikeNum());
+            detailActivity.putExtra("commentNum", arrayList.get(position).getCommentNum());
+            detailActivity.putStringArrayListExtra("postImg", (ArrayList<String>) arrayList.get(position).getPostUri());
+            detailActivity.putExtra("postId",documentId);
+
+            (v.getContext()).startActivity(detailActivity);
+        });
     }
 
     private void yseLike(ViewHolder holder) {
@@ -188,7 +211,6 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         }
 
         timer = new Timer();
-        Log.d("TEST","s");
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
