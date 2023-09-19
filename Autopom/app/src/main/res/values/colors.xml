@@ -10,4 +10,5 @@
     <color name="light_gray">#D3D3D3</color>
     <color name="dark_gray">#B7B7B7</color>
     <color name="blue">#0C70F2</color>
+    <color name="comment_gray">#6C6666</color>
 </resources>
