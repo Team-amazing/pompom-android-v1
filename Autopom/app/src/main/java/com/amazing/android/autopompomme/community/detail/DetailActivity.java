@@ -77,11 +77,12 @@ public class DetailActivity extends AppCompatActivity {
 
         rvPostImg = binding.rvDetailImg;
         rvPostImg.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        DetailAdapter detailAdapter = new DetailAdapter(postImg);
+        rvPostImg.setAdapter(detailAdapter);
 
         rvComment = binding.rvDetailComment;
         rvComment.setLayoutManager(new LinearLayoutManager(this));
 
-        DetailAdapter detailAdapter = new DetailAdapter(postImg);
 
         readComment();
         //writeComment();
@@ -89,7 +90,7 @@ public class DetailActivity extends AppCompatActivity {
 
         commentList = new ArrayList<>();
         adapter = new CommentAdapter(commentList);
-        rvPostImg.setAdapter(adapter);
+        rvComment.setAdapter(adapter);
 
     }
 
