@@ -1,5 +1,6 @@
 package com.amazing.android.autopompomme.write;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -16,6 +18,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.amazing.android.autopompomme.databinding.ActivityWriteBinding;
@@ -171,6 +174,18 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
             binding.tvWriteComplete.setClickable(true);
             binding.tvWriteComplete.setTextColor(Color.parseColor("#28DF99"));
             //binding.tvWriteComplete.setOnClickListener(v -> presenter.write(title, detail));
+        }
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
