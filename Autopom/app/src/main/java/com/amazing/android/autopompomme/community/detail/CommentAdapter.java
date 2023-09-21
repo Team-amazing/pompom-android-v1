@@ -1,5 +1,6 @@
 package com.amazing.android.autopompomme.community.detail;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
-    private List<Comment> comments;
+    private final List<Comment> comments;
     static class ViewHolder extends RecyclerView.ViewHolder{
 
         CircleImageView imageView;
@@ -48,6 +49,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         public void setComment(Comment commentList) {
             comment.setText(commentList.getComment());
+            Log.d("TEST","comment"+commentList.getComment());
         }
     }
 
@@ -58,14 +60,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @NonNull
     @Override
     public CommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.community_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_item,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
         Comment comment = comments.get(position);
-        holder.setName(comment);
+        //holder.setName(comment);
         holder.setComment(comment);
 
     }
