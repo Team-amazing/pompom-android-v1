@@ -3,16 +3,16 @@ package com.amazing.android.autopompomme.community.detail;
 public class Comment {
     private String userId;
     private String comment;
-    private long timestamp;
+    private String timestamp;
 
-    public Comment() {
-
-    }
-
-    public Comment(String userId,String comment, long timestamp) {
+    public Comment(String userId,String comment, String timestamp) {
         this.userId = userId;
         this.comment = comment;
         this.timestamp = timestamp;
+    }
+
+    public Comment() {
+
     }
 
     public String getUserId() {
@@ -31,11 +31,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 }
