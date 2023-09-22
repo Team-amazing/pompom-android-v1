@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.fragment;
+package com.amazing.android.autopompomme.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
