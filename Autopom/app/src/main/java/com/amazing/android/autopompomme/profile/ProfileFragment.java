@@ -1,6 +1,7 @@
 package com.amazing.android.autopompomme.profile;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,9 @@ import com.amazing.android.autopompomme.activity.SettingActivity;
 import com.amazing.android.autopompomme.databinding.FragmentProfileBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 import java.util.Objects;
 
@@ -29,6 +33,7 @@ public class ProfileFragment extends Fragment {
     private TabLayout tableLayout;
     private ViewPager2 viewPager;
     private ProfileAdapter adapter;
+    private FirebaseUser user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,10 +88,22 @@ public class ProfileFragment extends Fragment {
         adapter.addFragment(new MyUploadFragment());
         adapter.addFragment(new MyLikeFragment());
 
+        viewPager.setSaveEnabled(false);
         viewPager.setAdapter(adapter);
     }
 
     private void setData() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        for(UserInfo profile : user.getProviderData()) {
+            String nickName =profile.getDisplayName();
+            String email =profile.getEmail();
+            Uri photoUrl = profile.getPhotoUrl();
+
+            binding.tvProfileUserName.setText(nickName);
+            binding.tvProfileEmail.setText(email);
+            binding.ivProfileProfile.setImageURI(photoUrl);
+        }
 
     }
 }
