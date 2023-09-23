@@ -119,6 +119,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             yseLike(holder);
         });
 
+
         List<String> imgUri = arrayList.get(position).getPostUri();
         //RecyclerViewItem item = recyclerViewItems.get(position);
         Log.d("TEST","s"+imgUri);
@@ -137,7 +138,8 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             detailActivity.putExtra("likeNum",arrayList.get(position).getLikeNum());
             detailActivity.putExtra("commentNum", arrayList.get(position).getCommentNum());
             detailActivity.putStringArrayListExtra("postImg", (ArrayList<String>) arrayList.get(position).getPostUri());
-            detailActivity.putExtra("postId",documentId);
+            detailActivity.putExtra("postId",postId);
+            detailActivity.putExtra("userId",userId);
 
             (v.getContext()).startActivity(detailActivity);
         });
