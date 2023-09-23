@@ -1,17 +1,21 @@
 package com.amazing.android.autopompomme.community.detail;
 
+import android.net.Uri;
+
 public class Comment {
     private String userId;
     private String comment;
     private String timestamp;
+    private String profileUri;
 
-    public Comment(String userId,String comment, String timestamp) {
+    public Comment(String userId, String comment, String timestamp, String profileUri) {
         this.userId = userId;
         this.comment = comment;
         this.timestamp = timestamp;
+        this.profileUri = profileUri;
     }
 
-    public Comment() {
+    private Comment() {
 
     }
 
@@ -37,5 +41,13 @@ public class Comment {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getProfileUri() {
+        return profileUri;
+    }
+
+    public void setProfileUri(String profileUri) {
+        this.profileUri = profileUri;
     }
 }
