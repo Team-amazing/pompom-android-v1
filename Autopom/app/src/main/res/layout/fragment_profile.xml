@@ -138,7 +138,10 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_profile"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            app:tabTextColor="@color/dark_gray"
+            app:tabSelectedTextColor="@color/black"
+            app:tabIndicatorColor="@color/main1"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_profile"
