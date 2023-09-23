@@ -23,6 +23,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.amazing.android.autopompomme.R;
+import com.amazing.android.autopompomme.activity.MainActivity;
 import com.amazing.android.autopompomme.linking.adapter.LinkingAdapter;
 import com.amazing.android.autopompomme.databinding.ActivityLinkingBinding;
 
@@ -91,6 +92,15 @@ public class LinkingActivity extends AppCompatActivity implements Listener{
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(receiver, filter);
+
+        nextBtn();
+    }
+
+    private void nextBtn() {
+        binding.tvLinkingNext.setOnClickListener( v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
     }
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
