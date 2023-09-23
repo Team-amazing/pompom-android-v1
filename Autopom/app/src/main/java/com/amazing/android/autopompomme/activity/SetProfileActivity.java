@@ -154,7 +154,7 @@ public class SetProfileActivity extends AppCompatActivity {
             if(imageChange) {
                 profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(nickName)
-                        .setPhotoUri(Uri.parse(uri.toString()))
+                        .setPhotoUri(uri)
                         .build();
 
             }else {
