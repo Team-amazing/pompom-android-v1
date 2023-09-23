@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Objects;
 
 
@@ -95,10 +97,10 @@ public class ProfileFragment extends Fragment {
     private void setData() {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        for(UserInfo profile : user.getProviderData()) {
-            String nickName =profile.getDisplayName();
-            String email =profile.getEmail();
-            Uri photoUrl = profile.getPhotoUrl();
+        if(user != null) {
+            String nickName =user.getDisplayName();
+            String email =user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
 
             binding.tvProfileUserName.setText(nickName);
             binding.tvProfileEmail.setText(email);
