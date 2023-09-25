@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.community.CommunityAdapter;
 import com.amazing.android.autopompomme.databinding.ActivityDetailBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,11 +37,15 @@ public class DetailActivity extends AppCompatActivity {
     ActivityDetailBinding binding;
     private RecyclerView rvPostImg;
     private RecyclerView rvComment;
-    private DatabaseReference db;
+    private DatabaseReference dbRef;
     private String postId;
+    private String userId;
     private String profileName;
+    private String myNickName;
+    private Uri myProfileUri;
     private List<Comment> commentList;
     private CommentAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +60,7 @@ public class DetailActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        db = FirebaseDatabase.getInstance().getReference();
+        dbRef = FirebaseDatabase.getInstance().getReference();
 
 
         Intent intent = getIntent();
@@ -68,12 +74,19 @@ public class DetailActivity extends AppCompatActivity {
         //int commentNum = Integer.parseInt(intent.getExtras().getString("commentNum"));
         List<String> postImg = intent.getStringArrayListExtra("postImg");
         postId = intent.getExtras().getString("postId");
+        userId = intent.getExtras().getString("userId");
+
+        readComment();
+        getUserData();
 
         binding.tvDetailTitle.setText(title);
         //binding.ivDetailProfile.setImageURI(profileImg);
         binding.tvDetailName.setText(profileName);
         binding.tvDetailTime.setText(time);
         binding.tvDetailContent.setText(content);
+
+        Log.d("TEST","f"+myProfileUri);
+        binding.ivDetailComment.setImageURI(myProfileUri);
 
         rvPostImg = binding.rvDetailImg;
         rvPostImg.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
@@ -84,7 +97,6 @@ public class DetailActivity extends AppCompatActivity {
         rvComment.setLayoutManager(new LinearLayoutManager(this));
 
 
-        readComment();
         //writeComment();
         binding.ibDetailSend.setOnClickListener( v -> writeComment());
 
@@ -94,14 +106,28 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+    private void getUserData() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null) {
+            myNickName = user.getDisplayName();
+            myProfileUri = user.getPhotoUrl();
+            Log.d("TEST","pu"+myProfileUri);
+        }
+    }
+
     private void writeComment() {
-        String commentId = db.child("comments").child(postId).push().getKey();
+        String commentId = dbRef.child("comments").child(postId).push().getKey();
 
         String commentText = binding.etDetailComment.getText().toString();
 
         //Comment comment = new Comment(profileName,commentText,getTime());
-        Comment comment = new Comment();
-        db.child("comments").child(postId).child(commentId).setValue(comment);
+        Comment comment = new Comment(myNickName,commentText,getTime(),myProfileUri.toString());
+        //dbRef.child(commentId).setValue(comment);
+
+
+        //dbRef.setValue(comment);
+        dbRef.child("comments").child(postId).child(userId).setValue(comment);
 
         Log.d("TEST","댓글 작성");
     }
@@ -115,13 +141,19 @@ public class DetailActivity extends AppCompatActivity {
     private void readComment() {
         Log.d("TEST","postId"+postId);
 
-        db.child("comments").child(postId).addValueEventListener(new ValueEventListener() {
+        dbRef.child("comments").child(postId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("TEST","q"+snapshot);
+                Log.d("TEST","a"+snapshot.getChildren());
+
+                //commentList.add(snapshot.getValue(Comment.class));
                 for(DataSnapshot commentSnapshot: snapshot.getChildren()) {
                     Comment comment = commentSnapshot.getValue(Comment.class);
-                    Log.d("TEST","c"+comment);
+                    Log.d("TEST","c"+commentSnapshot.getChildren());
 
+                    Log.d("TEST","x"+commentSnapshot);
+                    Log.d("TEST","s"+comment.getComment());
                     commentList.add(comment);
                 }
                 Log.d("TEST","list"+commentList);
@@ -131,7 +163,7 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d("TEST","데이터 불러오기 실패"+ error);
             }
         });
     }
