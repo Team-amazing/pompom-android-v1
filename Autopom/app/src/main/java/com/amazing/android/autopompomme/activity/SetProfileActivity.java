@@ -1,10 +1,13 @@
 package com.amazing.android.autopompomme.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -51,7 +54,16 @@ public class SetProfileActivity extends AppCompatActivity {
 
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, GALLERY_REQUEST_CODE);
+        //Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+
+        intent.setType("image/*");
+        if(intent.resolveActivity(getPackageManager()) != null) {
+            //startActivityForResult(intent, GALLERY_REQUEST_CODE);
+            startActivityForResult(Intent.createChooser(intent,"Select File"),GALLERY_REQUEST_CODE);
+            Log.d("TEST","n!!!!!!!!!");
+        }
     }
 
     @Override
@@ -66,7 +78,10 @@ public class SetProfileActivity extends AppCompatActivity {
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             uri = data.getData();
             String[] filePathColum = {MediaStore.Images.Media.DATA};
+            //Cursor cursor = getContentResolver().query(uri, filePathColum, null, null, null);
+
             Cursor cursor = getContentResolver().query(uri, filePathColum, null, null, null);
+
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndex(filePathColum[0]);
@@ -132,7 +147,8 @@ public class SetProfileActivity extends AppCompatActivity {
 
         UserProfileChangeRequest profileUpdates;
 
-        MemberInfo memberInfo = new MemberInfo(nickName);
+        Log.d("TEST","dd/"+uri);
+        MemberInfo memberInfo = new MemberInfo(nickName,uri.toString());
 
         if (user != null) {
             db.collection("users").document(user.getUid()).set(memberInfo)
