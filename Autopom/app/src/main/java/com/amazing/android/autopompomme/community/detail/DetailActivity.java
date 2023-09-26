@@ -17,6 +17,9 @@ import android.view.MenuItem;
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.community.CommunityAdapter;
 import com.amazing.android.autopompomme.databinding.ActivityDetailBinding;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +27,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 import java.text.SimpleDateFormat;
@@ -38,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView rvPostImg;
     private RecyclerView rvComment;
     private DatabaseReference dbRef;
+    private FirebaseFirestore db;
     private String postId;
     private String userId;
     private String profileName;
@@ -61,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         dbRef = FirebaseDatabase.getInstance().getReference();
+        db = FirebaseFirestore.getInstance();
 
 
         Intent intent = getIntent();
@@ -86,7 +94,10 @@ public class DetailActivity extends AppCompatActivity {
         binding.tvDetailContent.setText(content);
 
         Log.d("TEST","f"+myProfileUri);
-        binding.ivDetailComment.setImageURI(myProfileUri);
+        //binding.ivDetailComment.setImageURI(myProfileUri);
+        Glide.with(getBaseContext())
+                .load(myProfileUri)
+                .into(binding.ivDetailComment);
 
         rvPostImg = binding.rvDetailImg;
         rvPostImg.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
@@ -114,6 +125,19 @@ public class DetailActivity extends AppCompatActivity {
             myProfileUri = user.getPhotoUrl();
             Log.d("TEST","pu"+myProfileUri);
         }
+
+        DocumentReference userRef = db.collection("users").document(userId);
+        userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    Log.d("TEST","사용자 정보"+documentSnapshot);
+                }else {
+                    //사용자 정보 불러오기 실패
+                }
+            }
+        });
     }
 
     private void writeComment() {
