@@ -1,5 +1,6 @@
 package com.amazing.android.autopompomme.community.detail;
 
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
 
         public void setImageView(Comment comment) {
-            //imageView.setImageURI(comment.);
+            imageView.setImageURI(Uri.parse(comment.getProfileUri()));
         }
 
         public void setName(Comment comment) {
@@ -44,13 +45,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
 
         public void setTime(Comment comment) {
-            //time.setText(comment.getTimestamp());
+            time.setText(comment.getTimestamp());
         }
 
         public void setComment(Comment commentList) {
             comment.setText(commentList.getComment());
             Log.d("TEST","comment"+commentList.getComment());
         }
+
     }
 
     public CommentAdapter(List<Comment> comments) {
@@ -67,8 +69,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
         Comment comment = comments.get(position);
-        //holder.setName(comment);
+        holder.setName(comment);
         holder.setComment(comment);
+        holder.setImageView(comment);
+        holder.setTime(comment);
 
     }
 
