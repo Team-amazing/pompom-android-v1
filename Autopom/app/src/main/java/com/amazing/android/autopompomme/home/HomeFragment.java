@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.fragment;
+package com.amazing.android.autopompomme.home;
 
 import android.os.Build;
 import android.os.Bundle;
