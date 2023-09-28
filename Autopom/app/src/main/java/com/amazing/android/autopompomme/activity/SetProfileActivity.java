@@ -1,18 +1,24 @@
 package com.amazing.android.autopompomme.activity;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.amazing.android.autopompomme.api.MemberInfo;
 import com.amazing.android.autopompomme.databinding.ActivitySetProfileBinding;
@@ -53,6 +59,8 @@ public class SetProfileActivity extends AppCompatActivity {
     }
 
     private void openGallery() {
+        checkSelfPermission();
+
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         //Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -62,7 +70,6 @@ public class SetProfileActivity extends AppCompatActivity {
         if(intent.resolveActivity(getPackageManager()) != null) {
             //startActivityForResult(intent, GALLERY_REQUEST_CODE);
             startActivityForResult(Intent.createChooser(intent,"Select File"),GALLERY_REQUEST_CODE);
-            Log.d("TEST","n!!!!!!!!!");
         }
     }
 
@@ -94,9 +101,27 @@ public class SetProfileActivity extends AppCompatActivity {
             imageChange = true;
 
         }
+    }
 
+    public void checkSelfPermission() {
+        Log.d("TEST","ss");
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("TEST","하용 안됨");
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                Log.d("TEST","dd");
+                Toast.makeText(this, "외부 저장소 사용을 위해 읽기/쓰기 필요", Toast.LENGTH_SHORT).show();
+            }
+            Log.d("TEST","요청");
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+        }else {
+            Log.d("TEST","하용 됨");
+        }
 
     }
+
+
 
     private void nicknameCheck() {
         String nickName = binding.etSetProfile.getText().toString();
