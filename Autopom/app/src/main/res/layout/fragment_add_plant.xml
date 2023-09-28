@@ -9,7 +9,7 @@
     app:cardElevation="10dp"
     app:strokeColor="@color/main2"
     app:cardUseCompatPadding="true"
-    tools:context=".fragment.AddPlantFragment">
+    tools:context=".home.AddPlantFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
             android:src="@drawable/baseline_add_circle_24"
             android:backgroundTint="@color/main2"
             android:layout_marginTop="150dp"
+            android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
