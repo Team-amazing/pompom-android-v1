@@ -11,7 +11,7 @@ import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.databinding.ActivityMainBinding;
 import com.amazing.android.autopompomme.community.CommunityFragment;
 import com.amazing.android.autopompomme.fragment.FunctionFragment;
-import com.amazing.android.autopompomme.fragment.HomeFragment;
+import com.amazing.android.autopompomme.home.HomeFragment;
 import com.amazing.android.autopompomme.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
