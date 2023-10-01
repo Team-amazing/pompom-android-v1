@@ -1,14 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FunctionFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.FunctionFragment"
+    android:background="#EEEEEE">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/iv_function_back"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:src="@drawable/function_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="dhcfvjgbhj" />
+        android:id="@+id/tv_function_myPot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="내 팜팜이"
+        android:fontFamily="@font/ibm_medium"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_function_tmp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="28"
+        android:fontFamily="@font/ibm_medium"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_function_t"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/tv_function_myPot"/>
+
+    <TextView
+        android:id="@+id/tv_function_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="°C"
+        android:textSize="28sp"
+        android:fontFamily="@font/ibm_medium"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/orange"
+        app:layout_constraintTop_toTopOf="@id/tv_function_myPot"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/pb_function_hum"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:max="100"
+        android:progress="25"
+        android:layout_marginTop="30dp"
+        android:progressDrawable="@drawable/function_progress_hum"
+        app:layout_constraintStart_toStartOf="@id/tv_function_myPot"
+        app:layout_constraintEnd_toEndOf="@id/tv_function_t"
+        app:layout_constraintTop_toBottomOf="@id/tv_function_t"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재 습도"
+        android:textSize="12sp"
+        android:fontFamily="@font/ibm_medium"
+        app:layout_constraintStart_toStartOf="@id/pb_function_hum"
+        app:layout_constraintBottom_toTopOf="@id/pb_function_hum"/>
+
+    <TextView
+        android:id="@+id/tv_function_hum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="25%"
+        android:textSize="12sp"
+        android:fontFamily="@font/ibm_medium"
+        app:layout_constraintEnd_toEndOf="@id/pb_function_hum"
+        app:layout_constraintBottom_toTopOf="@id/pb_function_hum"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/pb_function_waterTank"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:max="100"
+        android:progress="60"
+        android:layout_marginTop="30dp"
+        android:progressDrawable="@drawable/function_progress_water_tank"
+        app:layout_constraintStart_toStartOf="@id/pb_function_hum"
+        app:layout_constraintEnd_toEndOf="@id/pb_function_hum"
+        app:layout_constraintTop_toBottomOf="@id/pb_function_hum"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="물주기 통"
+        android:textSize="12sp"
+        android:fontFamily="@font/ibm_medium"
+        app:layout_constraintStart_toStartOf="@id/pb_function_waterTank"
+        app:layout_constraintBottom_toTopOf="@id/pb_function_waterTank"/>
+
+    <TextView
+        android:id="@+id/tv_function_waterTank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60%"
+        android:textSize="12sp"
+        android:fontFamily="@font/ibm_medium"
+        app:layout_constraintEnd_toEndOf="@id/pb_function_waterTank"
+        app:layout_constraintBottom_toTopOf="@id/pb_function_waterTank"/>
+
+    <LinearLayout
+        android:id="@+id/iv_function_water"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/function_radius"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/iv_function_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_function_light">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/function_water"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="물주기"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ibm_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30분 전에 마지막으로 물 줌"
+            android:textSize="10sp"
+            android:fontFamily="@font/ibm_regular"
+            android:textColor="@color/dark_gray"
+            android:layout_gravity="center"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:track="@drawable/function_switch_selector"
+            android:thumb="@drawable/function_switch_thumb"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:showText="true"
+            android:checked="false"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/iv_function_light"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/function_radius"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/iv_function_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_function_water">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/function_sun"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전등"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ibm_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"/>
+
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:track="@drawable/function_switch_selector"
+            android:thumb="@drawable/function_switch_thumb"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:showText="true"
+            android:checked="false"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/iv_function_waterTank"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/function_radius"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/iv_function_water"
+        app:layout_constraintStart_toStartOf="@id/iv_function_water">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/function_water_tank"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="물통 알림"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ibm_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재 60%"
+            android:textSize="10sp"
+            android:fontFamily="@font/ibm_regular"
+            android:textColor="@color/dark_gray"
+            android:layout_gravity="center"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:track="@drawable/function_switch_selector"
+            android:thumb="@drawable/function_switch_thumb"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:showText="true"
+            android:checked="false"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/iv_function_blueTooth"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/function_radius"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/iv_function_light"
+        app:layout_constraintEnd_toEndOf="@id/iv_function_light">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/function_bluetooth"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="블루투스"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ibm_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지금 연결하기 >"
+            android:textColor="@color/real_gray"
+            android:textSize="14sp"
+            android:fontFamily="@font/ibm_medium"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
