@@ -12,4 +12,6 @@
     <color name="blue">#0C70F2</color>
     <color name="comment_gray">#6C6666</color>
     <color name="orange">#F7752C</color>
+    <color name="real_gray">#7C7C7C</color>
+    <color name="setting_line">#EBEBEB</color>
 </resources>
