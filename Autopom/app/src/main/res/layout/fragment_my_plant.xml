@@ -1,33 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="270dp"
-    android:layout_height="450dp"
-    app:cardCornerRadius="15dp"
-    app:strokeColor="@color/main2"
-    app:cardElevation="10dp"
-    app:cardBackgroundColor="@color/white"
-    app:cardUseCompatPadding="true"
-    tools:context=".home.MyPlantFragment">
+    android:layout_width="280dp"
+    android:layout_height="600dp"
+    tools:context=".home.MyPlantFragment"
+    android:background="@drawable/my_plant_back">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_my_plant_pot"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/my_plant_pot"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/tv_myPlant_appName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="팜팜이"
-            android:textColor="@color/main1"
-            android:textSize="30sp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/tv_my_plant_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/light_black"
+        android:text="+ 12"
+        android:fontFamily="@font/ibm_bold"
+        app:layout_constraintTop_toTopOf="@id/iv_my_plant_pot"
+        app:layout_constraintBottom_toBottomOf="@id/iv_my_plant_pot"
+        app:layout_constraintStart_toEndOf="@id/iv_my_plant_pot"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_my_plant_name"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="나의 팜팜이"
+        android:gravity="center"
+        android:background="@drawable/my_plant_name_tag"
+        android:layout_marginTop="120dp"
+        android:textColor="@color/light_black"
+        android:textSize="18sp"
+        android:fontFamily="@font/ibm_semibold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/pb_my_plant_state"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:max="100"
+        android:progress="20"
+        android:layout_marginTop="30dp"
+        android:progressDrawable="@drawable/my_plant_state"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/light_black"
+        android:text="20%"
+        android:fontFamily="@font/ibm_semibold"
+        app:layout_constraintStart_toStartOf="@id/pb_my_plant_state"
+        app:layout_constraintEnd_toEndOf="@id/pb_my_plant_state"
+        app:layout_constraintTop_toBottomOf="@id/pb_my_plant_state"/>
 
 
-</com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
