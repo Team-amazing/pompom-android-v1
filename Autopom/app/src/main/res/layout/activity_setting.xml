@@ -57,6 +57,7 @@
         android:layout_marginEnd="20dp"
         android:track="@drawable/setting_alarm_selector"
         android:thumb="@drawable/setting_switch_thumb"
+        android:checked="true"
         app:layout_constraintTop_toTopOf="@id/tv_setting_alarmGet"
         app:layout_constraintBottom_toBottomOf="@id/tv_setting_alarmGet"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -124,7 +125,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:fontFamily="@font/ibm_medium"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="@id/iv_setting_line2"
         app:layout_constraintTop_toBottomOf="@id/iv_setting_line2"/>
@@ -137,7 +138,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:fontFamily="@font/ibm_medium"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="@id/iv_setting_line2"
         app:layout_constraintTop_toBottomOf="@id/iv_setting_line2"/>
@@ -146,7 +147,7 @@
         android:id="@+id/iv_setting_line3"
         android:layout_width="match_parent"
         android:layout_height="6dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:background="@color/setting_line"
         app:layout_constraintStart_toStartOf="@id/iv_setting_line2"
         app:layout_constraintEnd_toEndOf="@id/iv_setting_line2"
