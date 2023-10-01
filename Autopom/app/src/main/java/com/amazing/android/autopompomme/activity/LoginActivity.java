@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void gotoSignup() {
         Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-        startActivity(intent );
+        startActivity(intent);
     }
 
     private void checkTextInput() {
