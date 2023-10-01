@@ -18,6 +18,7 @@ import android.widget.TableLayout;
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.activity.SettingActivity;
 import com.amazing.android.autopompomme.databinding.FragmentProfileBinding;
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -105,6 +106,7 @@ public class ProfileFragment extends Fragment {
             binding.tvProfileUserName.setText(nickName);
             binding.tvProfileEmail.setText(email);
             binding.ivProfileProfile.setImageURI(photoUrl);
+
         }
 
     }
