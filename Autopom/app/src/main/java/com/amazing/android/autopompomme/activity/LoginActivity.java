@@ -24,10 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
-
     private EditText email, password;
-
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,15 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String uid = user.getUid();
-
-                            sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("userId", uid);
-                            editor.apply();
-
                             startToast("로그인에 성공했습니다.");
                             myStartActivity(MainActivity.class);
                         } else {
