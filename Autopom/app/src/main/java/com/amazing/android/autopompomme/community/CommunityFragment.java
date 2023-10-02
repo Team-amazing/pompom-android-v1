@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amazing.android.autopompomme.activity.MainActivity;
 import com.amazing.android.autopompomme.databinding.FragmentCommunityBinding;
 import com.amazing.android.autopompomme.write.WriteActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class CommunityFragment extends Fragment {
@@ -118,8 +121,13 @@ public class CommunityFragment extends Fragment {
 
                             Log.d("TEST","list"+arrayList);
                             //List<RecyclerViewItem> items = arrayList;
-                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                            String userId = sharedPreferences.getString("userId", null);
+                            //SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+                            //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs",0);
+                            //String userId = sharedPreferences.getString("userId", "default value");
+
+                            SharedPreferences data = MainActivity.context.getSharedPreferences("MyPrefs",Context.MODE_PRIVATE);
+                            String userId = data.getString("userId","default value");
 
                             CommunityAdapter communityAdapter = new CommunityAdapter(arrayList,userId);
                             recyclerView.setAdapter(communityAdapter);
