@@ -1,5 +1,6 @@
 package com.amazing.android.autopompomme.write.presenter;
 
+import android.content.Context;
 import android.net.Uri;
 
 import java.util.List;
@@ -10,6 +11,6 @@ public interface WriteContract {
     }
 
     interface Presenter{
-        void write(String profileName, Uri profileUri, String date,String title, String detail, List<Uri> imgUris);
+        void write(String profileName, Uri profileUri, String date, String title, String detail, List<Uri> imgUris, String uid, Context context);
     }
 }
