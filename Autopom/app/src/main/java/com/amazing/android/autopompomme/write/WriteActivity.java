@@ -47,6 +47,7 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
     private String name;
     private Uri profileUrl;
     private String time;
+    private String uid;
 
     EditText title,detail;
 
@@ -84,7 +85,7 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
         });
 
         postData();
-        binding.tvWriteComplete.setOnClickListener( v -> presenter.write(name, profileUrl, time, title.getText().toString(),detail.getText().toString(),imgUrls));
+        binding.tvWriteComplete.setOnClickListener( v -> presenter.write(name, profileUrl, time, title.getText().toString(),detail.getText().toString(),imgUrls,uid,getBaseContext()));
 
 
 
@@ -100,6 +101,7 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
             name = user.getDisplayName();
             profileUrl = user.getPhotoUrl();
             time = format.format(date);
+            uid = user.getUid();
         }
     }
 

@@ -1,10 +1,13 @@
 package com.amazing.android.autopompomme.write.presenter;
 
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.amazing.android.autopompomme.write.WriteActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,7 +37,7 @@ public class WritePresenter implements WriteContract.Presenter {
     }
 
     @Override
-    public void write(String profileName, Uri profileUri, String date, String title, String detail, List<Uri> imgUris) {
+    public void write(String profileName, Uri profileUri, String date, String title, String detail, List<Uri> imgUris, String uid, Context context) {
 
         List<Task<Uri>> uploadTasks = new ArrayList<>();
         storage = FirebaseStorage.getInstance();
@@ -75,6 +78,7 @@ public class WritePresenter implements WriteContract.Presenter {
                 post.put("title", title);
                 post.put("content", detail);
                 post.put("postUri", imgUriList);
+                post.put("uid", uid);
 
                 fireStore.collection("posts")
                         .add(post)
@@ -82,6 +86,7 @@ public class WritePresenter implements WriteContract.Presenter {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d("TEST", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                Toast.makeText(context,"작성되었습니다", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
