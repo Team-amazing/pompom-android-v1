@@ -18,6 +18,7 @@ import android.widget.TableLayout;
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.activity.SettingActivity;
 import com.amazing.android.autopompomme.databinding.FragmentProfileBinding;
+import com.amazing.android.autopompomme.ranking.RankingActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -51,10 +52,7 @@ public class ProfileFragment extends Fragment {
 
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
 
-        binding.ibProfileSetting.setOnClickListener( v-> {
-            Intent intent = new Intent(getActivity(), SettingActivity.class);
-            startActivity(intent);
-        });
+
 
 
         //adapter.addFragment(new MyUploadFragment());
@@ -63,8 +61,21 @@ public class ProfileFragment extends Fragment {
         setData();
         setPager();
         setTabLayout();
+        setBtn();
 
         return binding.getRoot();
+    }
+
+    private void setBtn() {
+        binding.ibProfileSetting.setOnClickListener( v-> {
+            Intent intent = new Intent(getActivity(), SettingActivity.class);
+            startActivity(intent);
+        });
+
+        binding.btnProfileRanking.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), RankingActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void setTabLayout() {
