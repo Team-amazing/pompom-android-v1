@@ -1,47 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="270dp"
-    android:layout_height="450dp"
-    app:cardCornerRadius="15dp"
-    app:cardBackgroundColor="@color/main2"
-    app:cardElevation="10dp"
-    app:strokeColor="@color/main2"
-    app:cardUseCompatPadding="true"
+    android:layout_width="280dp"
+    android:layout_height="600dp"
+    android:background="@drawable/add_plant_back"
     tools:context=".home.AddPlantFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageButton
+        android:id="@+id/ib_addPlant"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@drawable/add_pant_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="새로운 팜팜이 추가하기"
+        android:textSize="14sp"
+        android:textColor="@color/light_black"
+        android:fontFamily="@font/ibm_semibold"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@id/ib_addPlant"
+        app:layout_constraintEnd_toEndOf="@id/ib_addPlant"
+        app:layout_constraintTop_toBottomOf="@id/ib_addPlant"/>
 
-        <ImageButton
-            android:id="@+id/ib_addPlant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_add_circle_24"
-            android:backgroundTint="@color/main2"
-            android:layout_marginTop="150dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 식물 등록하기"
-            android:textSize="25sp"
-            android:layout_marginTop="60dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/ib_addPlant"
-            app:layout_constraintEnd_toEndOf="@id/ib_addPlant"
-            app:layout_constraintTop_toBottomOf="@id/ib_addPlant"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
