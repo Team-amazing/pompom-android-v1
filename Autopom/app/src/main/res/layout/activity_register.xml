@@ -17,10 +17,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="식물 등록하기"
-            android:textStyle="bold"
+            android:text="새로운 팜팜이 추가하기"
+            android:fontFamily="@font/ibm_medium"
             android:textSize="17sp"
-            android:textColor="@color/black"
+            android:textColor="@color/light_black"
             android:layout_gravity="center"/>
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/light_gray"
             android:textSize="15sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/ibm_medium"
             android:text="완료"
             android:layout_gravity="right"
             android:layout_marginRight="20dp"/>
@@ -38,104 +38,142 @@
         android:id="@+id/tv_register_notice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="내 식물에 대해 알려주세요!"
-        android:textStyle="bold"
+        android:text="내 팜팜이를 소개해주세요!"
+        android:fontFamily="@font/ibm_semibold"
         android:textSize="17sp"
-        android:textColor="@color/black"
+        android:textColor="@color/main1"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tb_register"/>
-    
-    <ImageButton
-        android:id="@+id/ib_register_select"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/outline_camera_alt_24"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/radius_5"
-        android:backgroundTint="@color/light_gray"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_register_notice"/>
 
     <TextView
         android:id="@+id/tv_register_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="식물 사진을 등록해주세요"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:fontFamily="@font/ibm_medium"
+        android:textColor="@color/light_black"
+        android:textSize="14sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@id/tv_register_notice"
+        app:layout_constraintTop_toBottomOf="@id/tv_register_notice"/>
+    
+    <ImageButton
+        android:id="@+id/ib_register_select"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/register_camera"
         android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="@id/ib_register_select"
-        app:layout_constraintEnd_toEndOf="@+id/ib_register_select"
-        app:layout_constraintTop_toBottomOf="@id/ib_register_select"/>
+        android:background="@drawable/register"
+        app:layout_constraintStart_toStartOf="@id/tv_register_register"
+        app:layout_constraintTop_toBottomOf="@id/tv_register_register"/>
 
+    <ImageView
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:background="@drawable/register_dot"
+        app:layout_constraintTop_toTopOf="@id/tv_register_plantName"
+        app:layout_constraintEnd_toStartOf="@id/tv_register_plantName"/>
     <TextView
+        android:id="@+id/tv_register_plantName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="식물 이름"
-        android:textSize="10sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:text="팜팜이의 식물 종은 무엇인가요?"
+        android:textSize="14sp"
+        android:fontFamily="@font/ibm_medium"
+        android:textColor="@color/light_black"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintStart_toStartOf="@id/et_register_plantName"
         app:layout_constraintBottom_toTopOf="@id/et_register_plantName"/>
         
     <EditText
         android:id="@+id/et_register_plantName"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/register"
+        android:textColor="@color/light_black"
+        android:hint="예) 해바라기, 상추, 채송화"
+        android:paddingLeft="12dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/ibm_medium"
+        android:singleLine="true"
+        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="@id/ib_register_select"
-        app:layout_constraintEnd_toEndOf="@id/ib_register_select"
-        app:layout_constraintTop_toBottomOf="@id/tv_register_register"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ib_register_select"/>
+
+    <ImageView
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:background="@drawable/register_dot"
+        app:layout_constraintTop_toTopOf="@id/tv_register_plantNick"
+        app:layout_constraintEnd_toStartOf="@id/tv_register_plantNick"/>
 
     <TextView
+        android:id="@+id/tv_register_plantNick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="키우기 시작한 날짜"
-        android:textSize="10sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:text="팜팜이의 별명을 지어주세요."
+        android:textSize="14sp"
+        android:textColor="@color/light_black"
+        android:fontFamily="@font/ibm_medium"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="7dp"
-        app:layout_constraintStart_toStartOf="@id/et_register_plantDate"
-        app:layout_constraintBottom_toTopOf="@id/et_register_plantDate"/>
-
-    <EditText
-        android:id="@+id/et_register_plantDate"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/register"
-        app:layout_constraintStart_toStartOf="@id/et_register_plantName"
-        app:layout_constraintEnd_toEndOf="@id/et_register_plantName"
-        app:layout_constraintTop_toBottomOf="@id/et_register_plantName"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="식물 이름"
-        android:textSize="10sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintStart_toStartOf="@id/et_register_plantNick"
         app:layout_constraintBottom_toTopOf="@id/et_register_plantNick"/>
 
     <EditText
         android:id="@+id/et_register_plantNick"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/register"
+        android:paddingLeft="12dp"
+        android:textColor="@color/light_black"
+        android:textSize="14sp"
+        android:fontFamily="@font/ibm_medium"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="@id/et_register_plantName"
+        app:layout_constraintEnd_toEndOf="@id/et_register_plantName"
+        app:layout_constraintTop_toBottomOf="@id/et_register_plantName"/>
+
+    <ImageView
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:background="@drawable/register_dot"
+        app:layout_constraintTop_toTopOf="@id/tv_register_plantDate"
+        app:layout_constraintEnd_toStartOf="@id/tv_register_plantDate"/>
+
+    <TextView
+        android:id="@+id/tv_register_plantDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="팜팜이를 언제부터 키우셨나요?"
+        android:textSize="14sp"
+        android:fontFamily="@font/ibm_medium"
+        android:textColor="@color/light_black"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintStart_toStartOf="@id/et_register_plantDate"
-        app:layout_constraintEnd_toEndOf="@id/et_register_plantDate"
-        app:layout_constraintTop_toBottomOf="@id/et_register_plantDate"/>
+        app:layout_constraintBottom_toTopOf="@id/et_register_plantDate"/>
+
+    <EditText
+        android:id="@+id/et_register_plantDate"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/register"
+        android:textSize="14sp"
+        android:textColor="@color/light_black"
+        android:paddingLeft="12sp"
+        android:fontFamily="@font/ibm_medium"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="@id/et_register_plantNick"
+        app:layout_constraintEnd_toEndOf="@id/et_register_plantNick"
+        app:layout_constraintTop_toBottomOf="@id/et_register_plantNick"/>
 
         
 
