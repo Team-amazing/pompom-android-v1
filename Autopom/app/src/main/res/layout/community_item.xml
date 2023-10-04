@@ -20,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kevin"
-        android:textColor="@color/black"
+        android:fontFamily="@font/ibm_medium"
+        android:textColor="@color/light_black"
         android:textSize="10sp"
         android:layout_marginLeft="10dp"
         app:layout_constraintLeft_toRightOf="@id/iv_community"
@@ -32,14 +33,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1주전"
-        android:textColor="@color/black"
+        android:fontFamily="@font/ibm_medium"
+        android:textColor="@color/light_black"
         android:textSize="12sp"
         android:layout_marginRight="30dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_community_userId"
         app:layout_constraintBottom_toBottomOf="@id/tv_community_userId"/>
 
-
+    <ImageView
+        android:id="@+id/iv_community_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_community"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_community"
@@ -54,15 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/iv_community_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/light_gray"
-                android:layout_marginTop="15dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_community"/>
+
 
             <TextView
                 android:id="@+id/tv_community_title"
@@ -70,20 +72,20 @@
                 android:layout_height="wrap_content"
                 android:text="팜팜이는 멈추지 않고 자란다"
                 android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
+                android:textColor="@color/light_black"
+                android:fontFamily="@font/ibm_semibold"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@id/iv_community_line"/>
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_community"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:layout_marginTop="15dp"
-                app:layout_constraintLeft_toLeftOf="@id/iv_community_line"
-                app:layout_constraintRight_toRightOf="@id/iv_community_line"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_title"/>
 
             <TextView
@@ -94,7 +96,8 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textSize="12sp"
-                android:textColor="@color/black"
+                android:textColor="@color/light_black"
+                android:fontFamily="@font/ibm_medium"
                 android:layout_marginTop="20dp"
                 app:layout_constraintLeft_toLeftOf="@id/vp_community"
                 app:layout_constraintRight_toRightOf="@id/vp_community"
@@ -117,8 +120,8 @@
                 android:layout_height="wrap_content"
                 android:text="138명이 하트를 보냈어요"
                 android:textSize="13sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
+                android:textColor="@color/light_black"
+                android:fontFamily="@font/ibm_semibold"
                 android:layout_marginTop="12dp"
                 app:layout_constraintLeft_toLeftOf="@id/iv_community_line1"
                 app:layout_constraintTop_toBottomOf="@id/iv_community_line1"/>
@@ -129,8 +132,8 @@
                 android:layout_height="wrap_content"
                 android:text="댓글 42개"
                 android:textColor="@color/black"
+                android:fontFamily="@font/ibm_regular"
                 android:textSize="11sp"
-                android:layout_marginTop="3dp"
                 app:layout_constraintLeft_toLeftOf="@id/tv_community_like"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_like"/>
 
@@ -139,6 +142,7 @@
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:text="좋아요"
+                android:fontFamily="@font/ibm_medium"
                 android:drawableLeft="@drawable/baseline_favorite_border_24"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
@@ -156,6 +160,7 @@
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:text="좋아요"
+                android:fontFamily="@font/ibm_medium"
                 android:drawableLeft="@drawable/baseline_favorite_24"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
