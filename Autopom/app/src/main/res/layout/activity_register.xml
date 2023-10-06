@@ -24,12 +24,14 @@
             android:layout_gravity="center"/>
 
         <TextView
+            android:id="@+id/tv_register_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/light_gray"
             android:textSize="15sp"
             android:fontFamily="@font/ibm_medium"
             android:text="완료"
+            android:clickable="false"
             android:layout_gravity="right"
             android:layout_marginRight="20dp"/>
     </androidx.appcompat.widget.Toolbar>
@@ -59,8 +61,8 @@
         app:layout_constraintStart_toStartOf="@id/tv_register_notice"
         app:layout_constraintTop_toBottomOf="@id/tv_register_notice"/>
     
-    <ImageButton
-        android:id="@+id/ib_register_select"
+    <ImageView
+        android:id="@+id/iv_register_select"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@drawable/register_camera"
@@ -101,9 +103,9 @@
         android:fontFamily="@font/ibm_medium"
         android:singleLine="true"
         android:layout_marginEnd="20dp"
-        app:layout_constraintStart_toStartOf="@id/ib_register_select"
+        app:layout_constraintStart_toStartOf="@id/iv_register_select"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ib_register_select"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_register_select"/>
 
     <ImageView
         android:layout_width="5dp"
@@ -144,11 +146,11 @@
         android:layout_width="5dp"
         android:layout_height="5dp"
         android:background="@drawable/register_dot"
-        app:layout_constraintTop_toTopOf="@id/tv_register_plantDate"
-        app:layout_constraintEnd_toStartOf="@id/tv_register_plantDate"/>
+        app:layout_constraintTop_toTopOf="@id/tv_register_plantDate_question"
+        app:layout_constraintEnd_toStartOf="@id/tv_register_plantDate_question"/>
 
     <TextView
-        android:id="@+id/tv_register_plantDate"
+        android:id="@+id/tv_register_plantDate_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="팜팜이를 언제부터 키우셨나요?"
@@ -157,11 +159,11 @@
         android:textColor="@color/light_black"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp"
-        app:layout_constraintStart_toStartOf="@id/et_register_plantDate"
-        app:layout_constraintBottom_toTopOf="@id/et_register_plantDate"/>
+        app:layout_constraintStart_toStartOf="@id/tv_register_plantDate"
+        app:layout_constraintBottom_toTopOf="@id/tv_register_plantDate"/>
 
-    <EditText
-        android:id="@+id/et_register_plantDate"
+    <TextView
+        android:id="@+id/tv_register_plantDate"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="50dp"
@@ -170,7 +172,7 @@
         android:textColor="@color/light_black"
         android:paddingLeft="12sp"
         android:fontFamily="@font/ibm_medium"
-        android:singleLine="true"
+        android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="@id/et_register_plantNick"
         app:layout_constraintEnd_toEndOf="@id/et_register_plantNick"
         app:layout_constraintTop_toBottomOf="@id/et_register_plantNick"/>
