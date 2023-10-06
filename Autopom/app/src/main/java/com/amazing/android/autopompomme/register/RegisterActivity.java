@@ -83,10 +83,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }, year, month, day);
 
-            datePickerDialog.show();
+            Calendar minDate = Calendar.getInstance();
+            minDate.set(year,month,day);
+            datePickerDialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
+
             datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.light_black, getTheme()));
             datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.light_black, getTheme()));
 
+            datePickerDialog.show();
         });
     }
 
