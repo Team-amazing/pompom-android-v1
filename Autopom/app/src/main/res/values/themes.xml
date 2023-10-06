@@ -7,6 +7,11 @@
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorPrimary">@color/white</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:datePickerDialogTheme">@style/MySpinnerDatePickerStyle</item>
+    </style>
+
+    <style name="MySpinnerDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/main1</item>
     </style>
 
 </resources>
