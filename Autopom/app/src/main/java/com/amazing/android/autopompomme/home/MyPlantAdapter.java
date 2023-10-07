@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.adapter;
+package com.amazing.android.autopompomme.home;
 
 import android.util.Log;
 
