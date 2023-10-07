@@ -1,6 +1,7 @@
 package com.amazing.android.autopompomme.home;
 
-import android.os.Build;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,8 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.amazing.android.autopompomme.R;
+import com.amazing.android.autopompomme.activity.MainActivity;
 import com.amazing.android.autopompomme.databinding.FragmentHomeBinding;
-import com.amazing.android.autopompomme.adapter.MyPlantAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
@@ -24,6 +32,8 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
     private MyPlantAdapter plantAdapter;
     private ViewPager2 viewPager;
+    FirebaseFirestore db;
+    private ArrayList<MyPlantList> arrayList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,8 +47,10 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater);
 
+        db = FirebaseFirestore.getInstance();
+        arrayList = new ArrayList<>();
+
         viewPager = binding.vpHome;
-        plantAdapter = new MyPlantAdapter(this);
 
         int pagerWidth = getResources().getDimensionPixelOffset(R.dimen.pagerWidth);
         int screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -106,9 +118,9 @@ public class HomeFragment extends Fragment {
 //                    page.setScaleY(0.8f);
 //                }
 
-                Log.d("TEST","lePos"+position);
-                Log.d("TEST","p"+currentPagePosition);
-                Log.d("TEST","sum"+(position + (float) currentPagePosition));
+                //Log.d("TEST","lePos"+position);
+                //Log.d("TEST","p"+currentPagePosition);
+                //Log.d("TEST","sum"+(position + (float) currentPagePosition));
 
 
                 if(position == 0) {
@@ -174,7 +186,41 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 
-        viewPager.setAdapter(plantAdapter);
+        HomeFragment homeFragment  = this;
+
+
+        SharedPreferences data = MainActivity.context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String userId = data.getString("userId","default value");
+
+        db.collection("register")
+                .whereEqualTo("uid",userId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            arrayList.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("TEST", document.getId() + " => " + document.getData());
+                                //int pageCnt = document.getId();
+                                //Log.d("TEST","pageCount"+pageCnt);
+                                MyPlantList data = document.toObject(MyPlantList.class);
+                                arrayList.add(data);
+                            }
+                            //plantAdapter.notifyDataSetChanged();
+
+                            plantAdapter = new MyPlantAdapter(homeFragment,arrayList);
+                            viewPager.setAdapter(plantAdapter);
+
+
+
+                        }else {
+                            //에러
+                        }
+                    }
+                });
+
+
 
         return binding.getRoot();
     }
