@@ -4,63 +4,62 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.amazing.android.autopompomme.R;
+import com.amazing.android.autopompomme.databinding.FragmentMyPlantBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MyPlantFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Date;
+
+
 public class MyPlantFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FragmentMyPlantBinding binding;
+    int page;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MyPlantFragment() {
-        // Required empty public constructor
+    MyPlantList arrayList;
+    public MyPlantFragment(MyPlantList arrayList) {
+        this.arrayList = arrayList;
+        Log.d("TEST","myPlant1/"+arrayList);
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyPlantFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MyPlantFragment newInstance(String param1, String param2) {
-        MyPlantFragment fragment = new MyPlantFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_plant, container, false);
+
+        binding = FragmentMyPlantBinding.inflate(getLayoutInflater());
+
+        getDate();
+        setData();
+        return binding.getRoot();
+    }
+
+    private void setData() {
+        binding.tvMyPlantName.setText(arrayList.getPlantNickName());
+        binding.tvMyPlantDate.setText("+"+getDate());
+    }
+
+    private String getDate() {
+        String plantBirth = arrayList.getPlantBirth();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate localDate = LocalDate.parse(plantBirth, formatter);
+
+        LocalDate today = LocalDate.now();
+
+        return String.valueOf(ChronoUnit.DAYS.between(localDate, today)+1);
     }
 }
