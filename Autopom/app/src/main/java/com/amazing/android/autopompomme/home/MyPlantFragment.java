@@ -23,7 +23,7 @@ import java.util.Date;
 public class MyPlantFragment extends Fragment {
 
     FragmentMyPlantBinding binding;
-    int page;
+    int plantState;
 
     MyPlantList arrayList;
     public MyPlantFragment(MyPlantList arrayList) {
@@ -44,7 +44,38 @@ public class MyPlantFragment extends Fragment {
 
         getDate();
         setData();
+        setProgress();
+        setPlantImg();
         return binding.getRoot();
+    }
+
+    private void setPlantImg() {
+        switch ((int)plantState/10) {
+            case 0:
+            case 1:
+                binding.ivMyPlantPot1.setVisibility(View.VISIBLE); break;
+            case 2:
+            case 3:
+                binding.ivMyPlantPot2.setVisibility(View.VISIBLE); break;
+            case 4:
+            case 5:
+                binding.ivMyPlantPot3.setVisibility(View.VISIBLE); break;
+            case 6:
+            case 7:
+                binding.ivMyPlantPot4.setVisibility(View.VISIBLE); break;
+            case 8:
+            case 9:
+                binding.ivMyPlantPot5.setVisibility(View.VISIBLE); break;
+            case 10:
+                binding.ivMyPlantPot6.setVisibility(View.VISIBLE); break;
+        }
+    }
+
+    private void setProgress() {
+        int plantLife = 30;
+        plantState = 100/plantLife * Integer.parseInt(getDate());
+        binding.pbMyPlantState.setProgress(plantState);
+        binding.tvMyPlantState.setText(plantState+"%");
     }
 
     private void setData() {
