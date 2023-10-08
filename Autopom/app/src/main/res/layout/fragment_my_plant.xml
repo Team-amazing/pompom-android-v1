@@ -36,13 +36,79 @@
         android:text="나의 팜팜이"
         android:gravity="center"
         android:background="@drawable/my_plant_name_tag"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         android:textColor="@color/light_black"
         android:textSize="18sp"
         android:fontFamily="@font/ibm_semibold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_my_plant_pot1"
+        android:layout_width="144dp"
+        android:layout_height="145dp"
+        android:src="@drawable/my_plant1"
+        android:layout_marginBottom="125dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_my_plant_pot2"
+        android:layout_width="144dp"
+        android:layout_height="182dp"
+        android:src="@drawable/my_plant2"
+        android:layout_marginBottom="125dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_my_plant_pot3"
+        android:layout_width="144dp"
+        android:layout_height="174dp"
+        android:src="@drawable/my_plant3"
+        android:layout_marginBottom="125dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_my_plant_pot4"
+        android:layout_width="144dp"
+        android:layout_height="260dp"
+        android:src="@drawable/my_plant4"
+        android:layout_marginBottom="125dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_my_plant_pot5"
+        android:layout_width="154dp"
+        android:layout_height="291dp"
+        android:src="@drawable/my_plant5"
+        android:layout_marginBottom="125dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_my_plant_pot6"
+        android:layout_width="152dp"
+        android:layout_height="317dp"
+        android:src="@drawable/my_plant6"
+        android:layout_marginBottom="125dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/pb_my_plant_state"
@@ -59,6 +125,7 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
+        android:id="@+id/tv_my_plant_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
