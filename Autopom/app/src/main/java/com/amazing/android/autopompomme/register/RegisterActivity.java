@@ -77,20 +77,24 @@ public class RegisterActivity extends AppCompatActivity {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    plantBirth = year + "" + (month + 1) + "" + dayOfMonth;
+                    String formattedMonth = String.format("%02d", month + 1);
+                    String formattedDay = String.format("%02d", dayOfMonth);
+
+                    plantBirth = year + "" + formattedMonth + "" + formattedDay;
+                    //plantBirth = year + "" + (month + 1) + "" + dayOfMonth;
                     binding.tvRegisterPlantDate.setText(plantBirth);
                     checkInEssential();
                 }
             }, year, month, day);
 
-            Calendar minDate = Calendar.getInstance();
-            minDate.set(year,month,day);
-            datePickerDialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
+            Calendar maxDate = Calendar.getInstance();
+            maxDate.set(year,month,day);
+            datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
+
+            datePickerDialog.show();
 
             datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.light_black, getTheme()));
             datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.light_black, getTheme()));
-
-            datePickerDialog.show();
         });
     }
 
@@ -116,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getBaseContext(), "팜팜이가 추가되었습니다", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -188,6 +193,7 @@ public class RegisterActivity extends AppCompatActivity {
             cursor.close();
 
             binding.ivRegisterSelect.setImageURI(plantImgUri);
+            checkInEssential();
         }
     }
 
