@@ -49,11 +49,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tb_register"/>
 
+    <ImageView
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:background="@drawable/register_dot"
+        app:layout_constraintTop_toTopOf="@id/tv_register_register"
+        app:layout_constraintEnd_toStartOf="@id/tv_register_register"/>
+
     <TextView
         android:id="@+id/tv_register_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="식물 사진을 등록해주세요"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/ibm_medium"
         android:textColor="@color/light_black"
         android:textSize="14sp"
@@ -171,6 +179,7 @@
         android:textSize="14sp"
         android:textColor="@color/light_black"
         android:paddingLeft="12sp"
+        android:text="날짜 선택하기"
         android:fontFamily="@font/ibm_medium"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="@id/et_register_plantNick"
