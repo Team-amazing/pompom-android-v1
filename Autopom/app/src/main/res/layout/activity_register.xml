@@ -54,7 +54,8 @@
         android:layout_height="5dp"
         android:background="@drawable/register_dot"
         app:layout_constraintTop_toTopOf="@id/tv_register_register"
-        app:layout_constraintEnd_toStartOf="@id/tv_register_register"/>
+        app:layout_constraintEnd_toStartOf="@id/tv_register_register"
+        android:scaleType="matrix"/>
 
     <TextView
         android:id="@+id/tv_register_register"
