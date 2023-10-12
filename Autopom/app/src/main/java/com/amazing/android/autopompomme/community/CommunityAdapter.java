@@ -99,10 +99,11 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     @Override
     public void onBindViewHolder(@NonNull CommunityAdapter.ViewHolder holder, int position) {
         Glide.with(holder.itemView)
-                .load(arrayList.get(position).getProfile())
+                .load(arrayList.get(position).getProfileUri())
                 .into(holder.profileImg);
         holder.profileName.setText(arrayList.get(position).getProfileName());
-        holder.date.setText(arrayList.get(position).getDate());
+        //holder.date.setText(arrayList.get(position).getDate());
+        holder.date.setText(formatTimeString(arrayList.get(position).getDate()));
         holder.title.setText(arrayList.get(position).getTitle());
         holder.detail.setText(arrayList.get(position).getContent());
         holder.tvLike.setText(arrayList.get(position).getLikeNum()+"명이 하트를 보냈어요");
@@ -110,6 +111,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         likeNum = arrayList.get(position).getLikeNum();
         postId = arrayList.get(position).getPostId();
 
+        Log.d("TEST","u/"+arrayList.get(position).getProfileUri());
         initLike(holder);
         holder.btnNoLike.setOnClickListener( v -> {
             noLike(holder);
@@ -131,7 +133,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             Intent detailActivity = new Intent(v.getContext(), DetailActivity.class);
 
             detailActivity.putExtra("title", arrayList.get(position).getTitle()); //제목
-            detailActivity.putExtra("profileImg", arrayList.get(position).getProfile());
+            detailActivity.putExtra("profileImg", arrayList.get(position).getProfileUri());
             detailActivity.putExtra("profileName", arrayList.get(position).getProfileName());
             detailActivity.putExtra("time",arrayList.get(position).getDate());
             detailActivity.putExtra("content",arrayList.get(position).getContent());
@@ -143,6 +145,33 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
 
             (v.getContext()).startActivity(detailActivity);
         });
+    }
+
+    private static String formatTimeString(String regTime) {
+
+        int SEC = 60;
+        int MIN = 60;
+        int HOUR = 24;
+        int DAY = 30;
+        int MONTH = 12;
+
+        long curTime = System.currentTimeMillis();
+        long diffTime = (curTime - Long.parseLong(regTime)) / 1000;
+        String msg = null;
+        if (diffTime < SEC) {
+            msg = "방금 전";
+        } else if ((diffTime /= SEC) < MIN) {
+            msg = diffTime + "분 전";
+        } else if ((diffTime /= MIN) < HOUR) {
+            msg = (diffTime) + "시간 전";
+        } else if ((diffTime /= HOUR) < DAY) {
+            msg = (diffTime) + "일 전";
+        } else if ((diffTime /= DAY) < MONTH) {
+            msg = (diffTime) + "달 전";
+        } else {
+            msg = (diffTime) + "년 전";
+        }
+        return msg;
     }
 
     private void yseLike(ViewHolder holder) {

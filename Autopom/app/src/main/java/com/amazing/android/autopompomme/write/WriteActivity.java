@@ -95,12 +95,11 @@ public class WriteActivity extends AppCompatActivity implements WriteContract.Vi
     private void postData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+
         if(user!= null) {
             name = user.getDisplayName();
             profileUrl = user.getPhotoUrl();
-            time = format.format(date);
+            time = ""+now;
             uid = user.getUid();
         }
     }
