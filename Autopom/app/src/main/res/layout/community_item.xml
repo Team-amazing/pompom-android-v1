@@ -64,8 +64,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-
             <TextView
                 android:id="@+id/tv_community_title"
                 android:layout_width="wrap_content"
@@ -185,6 +183,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
