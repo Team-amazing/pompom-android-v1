@@ -173,7 +173,7 @@ public class SetProfileActivity extends AppCompatActivity {
         UserProfileChangeRequest profileUpdates;
 
         Log.d("TEST","dd/"+uri);
-        MemberInfo memberInfo = new MemberInfo(nickName,uri.toString());
+        MemberInfo memberInfo = new MemberInfo(nickName,uri.toString(),0);
 
         if (user != null) {
             db.collection("users").document(user.getUid()).set(memberInfo)
