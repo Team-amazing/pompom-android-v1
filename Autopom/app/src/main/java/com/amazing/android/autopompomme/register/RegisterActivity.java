@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.amazing.android.autopompomme.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -119,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
+                                updateRankingScore();
                                 Toast.makeText(getBaseContext(), "팜팜이가 추가되었습니다", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
@@ -204,6 +207,23 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void updateRankingScore() {
+        db.collection("users").document(uid)
+                .update("score", FieldValue.increment(3))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("TEST","점수 업데이트");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("TEST","점수 업데이트 실패:",e);
+                    }
+                });
     }
 
     @SuppressLint("NonConstantResourceId")
