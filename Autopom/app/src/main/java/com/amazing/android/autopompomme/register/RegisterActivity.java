@@ -211,7 +211,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void updateRankingScore() {
         db.collection("users").document(uid)
-                .update("score", FieldValue.increment(3))
+                .update("score", FieldValue.increment(5))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
