@@ -6,47 +6,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.HomeFragment">
 
-    <TextView
-        android:id="@+id/tv_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="pampamme"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="@color/main1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/pompomme_icon"
-        android:layout_marginLeft="7dp"
-        app:layout_constraintLeft_toRightOf="@id/tv_home"
-        app:layout_constraintTop_toTopOf="@id/tv_home"
-        app:layout_constraintBottom_toBottomOf="@id/tv_home"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_home"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_notifications_none_24"
-        android:layout_marginRight="25dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_home"
-        app:layout_constraintBottom_toBottomOf="@id/tv_home"/>
-    
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:src="@drawable/pampamme"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/pampam_icon"
+            android:layout_marginStart="8dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_notifications_none_24"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"/>
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_home"
         android:layout_width="match_parent"
         android:layout_height="600dp"
-        android:layout_marginBottom="50dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tb_home"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
