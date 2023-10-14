@@ -135,7 +135,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             detailActivity.putExtra("title", arrayList.get(position).getTitle()); //제목
             detailActivity.putExtra("profileImg", arrayList.get(position).getProfileUri());
             detailActivity.putExtra("profileName", arrayList.get(position).getProfileName());
-            detailActivity.putExtra("time",arrayList.get(position).getDate());
+            detailActivity.putExtra("time",formatTimeString(arrayList.get(position).getDate()));
             detailActivity.putExtra("content",arrayList.get(position).getContent());
             detailActivity.putExtra("likeNum",arrayList.get(position).getLikeNum());
             detailActivity.putExtra("commentNum", arrayList.get(position).getCommentNum());

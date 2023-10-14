@@ -7,7 +7,7 @@ import java.util.List;
 public class CommunityList {
     private String postId;
     private String profileName;
-    private Uri profileUri;
+    private String profileUri;
     private String date;
     private String title;
     private List<String> postUri;
@@ -33,11 +33,11 @@ public class CommunityList {
         this.profileName = profileName;
     }
 
-    public Uri getProfile() {
+    public String getProfileUri() {
         return profileUri;
     }
 
-    public void setProfile(Uri profile) {
+    public void setProfileUri(String profile) {
         this.profileUri = profileUri;
     }
 
