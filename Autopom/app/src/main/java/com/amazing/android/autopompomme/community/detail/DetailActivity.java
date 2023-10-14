@@ -19,6 +19,8 @@ import com.amazing.android.autopompomme.community.CommunityAdapter;
 import com.amazing.android.autopompomme.databinding.ActivityDetailBinding;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -152,7 +155,7 @@ public class DetailActivity extends AppCompatActivity {
 
         //dbRef.setValue(comment);
         dbRef.child("comments").child(postId).child(userId).setValue(comment);
-
+        updateRankingScore();
         Log.d("TEST","댓글 작성");
     }
     private String getTime(){
@@ -190,6 +193,23 @@ public class DetailActivity extends AppCompatActivity {
                 Log.d("TEST","데이터 불러오기 실패"+ error);
             }
         });
+    }
+
+    private void updateRankingScore() {
+        db.collection("users").document(userId)
+                .update("score", FieldValue.increment(2))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("TEST","점수 업데이트");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("TEST","점수 업데이트 실패:",e);
+                    }
+                });
     }
 
     @SuppressLint("NonConstantResourceId")
