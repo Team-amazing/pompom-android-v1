@@ -124,7 +124,4 @@ public class SignupActivity extends AppCompatActivity {
         Intent intent = new Intent(SignupActivity.this, SetProfileActivity.class);
         startActivity(intent);
     }
-
-
-
 }
