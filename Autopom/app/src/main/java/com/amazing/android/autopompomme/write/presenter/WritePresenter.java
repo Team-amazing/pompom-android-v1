@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -86,6 +87,7 @@ public class WritePresenter implements WriteContract.Presenter {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d("TEST", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                updateRankingScore(uid);
                                 Toast.makeText(context,"작성되었습니다", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -104,5 +106,22 @@ public class WritePresenter implements WriteContract.Presenter {
         //api 코드
         //이미지 api
 
+    }
+
+    private void updateRankingScore(String uid) {
+        fireStore.collection("users").document(uid)
+                .update("score", FieldValue.increment(3))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("TEST","점수 업데이트");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("TEST","점수 업데이트 실패:",e);
+                    }
+                });
     }
 }
