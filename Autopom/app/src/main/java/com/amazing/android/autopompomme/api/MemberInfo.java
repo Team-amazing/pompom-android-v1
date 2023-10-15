@@ -5,6 +5,8 @@ public class MemberInfo {
     private String userUri;
     private int score;
 
+    public MemberInfo() {}
+
     public MemberInfo(String nickname,String userUri,int score){
         this.nickname = nickname;
         this.userUri = userUri;
