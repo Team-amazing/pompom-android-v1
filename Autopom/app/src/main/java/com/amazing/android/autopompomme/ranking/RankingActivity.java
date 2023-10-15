@@ -71,19 +71,19 @@ public class RankingActivity extends AppCompatActivity {
                             MemberInfo first = rankingList.get(0);
                             binding.tvRankingFirstMan.setText(first.getNickname());
                             binding.ivRankingFirst.setImageURI(Uri.parse(first.getUserUri()));
-                            binding.tvRankingFirstP.setText(first.getScore());
+                            binding.tvRankingFirstP.setText(String.valueOf(first.getScore())+"P");
                         }
                         if (rankingList.size() == 2) {
                             MemberInfo second = rankingList.get(1);
                             binding.tvRankingSecondMan.setText(second.getNickname());
                             binding.ivRankingSecond.setImageURI(Uri.parse(second.getUserUri()));
-                            binding.tvRankingSecondP.setText(second.getScore());
+                            binding.tvRankingSecondP.setText(String.valueOf(second.getScore())+"P");
                         }
                         if (rankingList.size() == 3) {
                             MemberInfo third = rankingList.get(2);
                             binding.tvRankingThirdMan.setText(third.getNickname());
                             binding.ivRankingThird.setImageURI(Uri.parse(third.getUserUri()));
-                            binding.tvRankingThirdP.setText(third.getScore());
+                            binding.tvRankingThirdP.setText(String.valueOf(third.getScore())+"P");
                         }
                         if (rankingList.size() > 3) {
                             List<MemberInfo> restUser = rankingList.subList(3, rankingList.size());
