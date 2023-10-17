@@ -1,8 +1,6 @@
 package com.amazing.android.autopompomme.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,13 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
-    private EditText email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
-
-        email = binding.etLoginEmail;
-        password = binding.etLoginPassword;
 
         binding.tvLoginGoSignup.setOnClickListener(v -> gotoSignup());
 
@@ -49,7 +42,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkTextInput() {
-        TextWatcher textWatcher =  new TextWatcher() {
+        EditText email = binding.etLoginEmail;
+        EditText password = binding.etLoginPassword;
+
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -60,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = binding.etLoginEmail.getText().toString().trim();
                 String password = binding.etLoginPassword.getText().toString().trim();
 
-                binding.btnLoginLogin.setEnabled(!email.isEmpty()&&!password.isEmpty());
+                binding.btnLoginLogin.setEnabled(!email.isEmpty() && !password.isEmpty());
 
                 binding.btnLoginLogin.setOnClickListener(v -> logIn(email, password));
             }
@@ -68,12 +64,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-
             }
         };
         email.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
-
     }
 
     private void logIn(String email, String password) {
@@ -83,11 +77,11 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             startToast("로그인에 성공했습니다.");
-                            myStartActivity(MainActivity.class);
+                            myStartActivity();
                         } else {
                             if (task.getException() != null) {
                                 startToast(task.getException().toString());
-                                Log.d("TEST","예외"+task.getException().toString());
+                                Log.d("TEST", "예외" + task.getException().toString());
                             }
                         }
                     }
@@ -98,9 +92,9 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void myStartActivity(Class<?> cls) {
-        Intent intent = new Intent(LoginActivity.this, cls);
-        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+    private void myStartActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
