@@ -5,9 +5,10 @@ public class MemberInfo {
     private String userUri;
     private int score;
 
-    public MemberInfo() {}
+    public MemberInfo() {
+    }
 
-    public MemberInfo(String nickname,String userUri,int score){
+    public MemberInfo(String nickname, String userUri, int score) {
         this.nickname = nickname;
         this.userUri = userUri;
         this.score = score;
@@ -17,7 +18,7 @@ public class MemberInfo {
         return this.nickname;
     }
 
-    public void setNickname(String nickname){
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
