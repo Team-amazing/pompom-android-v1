@@ -1,10 +1,5 @@
 package com.amazing.android.autopompomme.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -14,19 +9,22 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.amazing.android.autopompomme.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.amazing.android.autopompomme.databinding.ActivitySettingBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import io.grpc.android.BuildConfig;
-
 public class SettingActivity extends AppCompatActivity {
 
     ActivitySettingBinding binding;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +49,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void deleteUser() {
-        binding.tvSettingGetOut.setOnClickListener( v -> {
+        binding.tvSettingGetOut.setOnClickListener(v -> {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
             assert user != null;
@@ -59,8 +57,8 @@ public class SettingActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()) {
-                                Toast.makeText(getBaseContext(),"탈퇴 되었습니다", Toast.LENGTH_SHORT).show();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getBaseContext(), "탈퇴 되었습니다", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getBaseContext(), StartActivity.class);
                                 startActivity(intent);
                             }
@@ -78,12 +76,14 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
-    public String getVersionInfo(Context context){
+    public String getVersionInfo(Context context) {
         String version = "0.0.0";
         try {
             PackageInfo i = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             version = i.versionName;
-        } catch(PackageManager.NameNotFoundException e) { }
+        } catch (PackageManager.NameNotFoundException ignored) {
+
+        }
         return version;
     }
 
