@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private final FunctionFragment functionFragment = new FunctionFragment();
     private final CommunityFragment communityFragment = new CommunityFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
-    public Context context;
+    public static Context context;
     ActivityMainBinding binding;
     private FragmentManager fragmentManager;
     private Map<Integer, Fragment> fragments;
