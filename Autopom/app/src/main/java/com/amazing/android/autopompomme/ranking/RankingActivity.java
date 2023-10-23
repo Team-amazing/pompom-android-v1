@@ -63,7 +63,7 @@ public class RankingActivity extends AppCompatActivity {
                             MemberInfo memberInfo = document.toObject(MemberInfo.class);
                             rankingList.add(memberInfo);
                         }
-                        
+
                         if (rankingList.size() == 1) {
                             MemberInfo first = rankingList.get(0);
                             binding.tvRankingFirstMan.setText(first.getNickname());
@@ -91,7 +91,6 @@ public class RankingActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        //실패
                         Log.d("TEST", "랭킹 불러오기 실패");
                     }
                 });
