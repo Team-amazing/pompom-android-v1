@@ -83,14 +83,13 @@ public class RegisterActivity extends AppCompatActivity {
                     String formattedDay = String.format("%02d", dayOfMonth);
 
                     plantBirth = year + "" + formattedMonth + "" + formattedDay;
-                    //plantBirth = year + "" + (month + 1) + "" + dayOfMonth;
                     binding.tvRegisterPlantDate.setText(plantBirth);
                     checkInEssential();
                 }
             }, year, month, day);
 
             Calendar maxDate = Calendar.getInstance();
-            maxDate.set(year,month,day);
+            maxDate.set(year, month, day);
             datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
 
             datePickerDialog.show();
@@ -215,13 +214,13 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Log.d("TEST","점수 업데이트");
+                        Log.d("TEST", "점수 업데이트");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("TEST","점수 업데이트 실패:",e);
+                        Log.d("TEST", "점수 업데이트 실패:", e);
                     }
                 });
     }

@@ -39,7 +39,6 @@ public class RankingActivity extends AppCompatActivity {
 
         initToolbar();
         fetchRanking();
-
     }
 
     private void initToolbar() {
@@ -64,26 +63,24 @@ public class RankingActivity extends AppCompatActivity {
                             MemberInfo memberInfo = document.toObject(MemberInfo.class);
                             rankingList.add(memberInfo);
                         }
-
-                        Log.d("TEST", "랭킹 불러오기 성공:" + rankingList);
-
+                        
                         if (rankingList.size() == 1) {
                             MemberInfo first = rankingList.get(0);
                             binding.tvRankingFirstMan.setText(first.getNickname());
                             binding.ivRankingFirst.setImageURI(Uri.parse(first.getUserUri()));
-                            binding.tvRankingFirstP.setText(String.valueOf(first.getScore())+"P");
+                            binding.tvRankingFirstP.setText(String.valueOf(first.getScore()) + "P");
                         }
                         if (rankingList.size() == 2) {
                             MemberInfo second = rankingList.get(1);
                             binding.tvRankingSecondMan.setText(second.getNickname());
                             binding.ivRankingSecond.setImageURI(Uri.parse(second.getUserUri()));
-                            binding.tvRankingSecondP.setText(String.valueOf(second.getScore())+"P");
+                            binding.tvRankingSecondP.setText(String.valueOf(second.getScore()) + "P");
                         }
                         if (rankingList.size() == 3) {
                             MemberInfo third = rankingList.get(2);
                             binding.tvRankingThirdMan.setText(third.getNickname());
                             binding.ivRankingThird.setImageURI(Uri.parse(third.getUserUri()));
-                            binding.tvRankingThirdP.setText(String.valueOf(third.getScore())+"P");
+                            binding.tvRankingThirdP.setText(String.valueOf(third.getScore()) + "P");
                         }
                         if (rankingList.size() > 3) {
                             List<MemberInfo> restUser = rankingList.subList(3, rankingList.size());
