@@ -1,7 +1,5 @@
 package com.amazing.android.autopompomme.community;
 
-import android.net.Uri;
-
 import java.util.List;
 
 public class CommunityList {
@@ -15,7 +13,8 @@ public class CommunityList {
     private int likeNum;
     private int commentNum;
 
-    public CommunityList() {}
+    public CommunityList() {
+    }
 
     public String getPostId() {
         return postId;
