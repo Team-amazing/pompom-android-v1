@@ -204,7 +204,6 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Log.d("TEST", "ss");
                 upDateLikesToSever();
                 isLikePending = false;
             }
