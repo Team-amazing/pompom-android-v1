@@ -7,9 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.amazing.android.autopompomme.write.WriteActivity;
 import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +29,6 @@ public class WritePresenter implements WriteContract.Presenter {
 
     private FirebaseFirestore fireStore;
     private FirebaseStorage storage;
-    private StorageReference reference;
 
     public WritePresenter(WriteContract.View view) {
         this.view = view;
@@ -43,15 +40,14 @@ public class WritePresenter implements WriteContract.Presenter {
         List<Task<Uri>> uploadTasks = new ArrayList<>();
         storage = FirebaseStorage.getInstance();
         fireStore = FirebaseFirestore.getInstance();
-        for(Uri imgUri : imgUris) {
+        for (Uri imgUri : imgUris) {
             StorageReference imgRef = storage.getReference().child("images/" + imgUri.getLastPathSegment());
             UploadTask uploadTask = imgRef.putFile(imgUri);
-            Log.d("TEST","task"+uploadTask);
 
             Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if(!task.isSuccessful()) {
+                    if (!task.isSuccessful()) {
                         throw task.getException();
                     }
                     return imgRef.getDownloadUrl();
@@ -66,12 +62,11 @@ public class WritePresenter implements WriteContract.Presenter {
             @Override
             public void onSuccess(List<Object> list) {
                 List<Uri> imgUriList = new ArrayList<>();
-                for(Object object : list) {
+                for (Object object : list) {
                     Uri downloadUrl = (Uri) object;
                     imgUriList.add(downloadUrl);
                 }
 
-                Log.d("TEST","downloadUrl"+imgUriList);
                 Map<String, Object> post = new HashMap<>();
                 post.put("profileName", profileName);
                 post.put("profileUri", profileUri);
@@ -88,7 +83,7 @@ public class WritePresenter implements WriteContract.Presenter {
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d("TEST", "DocumentSnapshot added with ID: " + documentReference.getId());
                                 updateRankingScore(uid);
-                                Toast.makeText(context,"작성되었습니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "작성되었습니다", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -97,15 +92,8 @@ public class WritePresenter implements WriteContract.Presenter {
                                 Log.w("TEST", "Error adding document", e);
                             }
                         });
-
             }
         });
-
-        //--------------------------------------------------------------------------------------
-
-        //api 코드
-        //이미지 api
-
     }
 
     private void updateRankingScore(String uid) {
@@ -114,13 +102,13 @@ public class WritePresenter implements WriteContract.Presenter {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Log.d("TEST","점수 업데이트");
+                        Log.d("TEST", "점수 업데이트");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("TEST","점수 업데이트 실패:",e);
+                        Log.d("TEST", "점수 업데이트 실패:", e);
                     }
                 });
     }

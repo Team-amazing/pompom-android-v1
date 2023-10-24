@@ -48,7 +48,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void checkTextInput() {
-        TextWatcher textWatcher =  new TextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -60,9 +60,9 @@ public class SignupActivity extends AppCompatActivity {
                 String password = binding.etSignupPassword.getText().toString().trim();
                 String passwordCheck = binding.etSignupPasswordCheck.getText().toString().trim();
 
-                binding.btnSignupSignup.setEnabled(!email.isEmpty()&&!password.isEmpty()&&!passwordCheck.isEmpty());
+                binding.btnSignupSignup.setEnabled(!email.isEmpty() && !password.isEmpty() && !passwordCheck.isEmpty());
 
-                if(password.equals(passwordCheck)) {
+                if (password.equals(passwordCheck)) {
                     binding.btnSignupSignup.setOnClickListener(v -> signup(email, password));
                 }
             }
@@ -86,11 +86,11 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             startToast("회원가입이 성공적으로 되었습니다.");
-                            myStartActivity(SetProfileActivity.class);
+                            myStartActivity();
 
 
                         } else {
-                            if(task.getException() != null){
+                            if (task.getException() != null) {
                                 startToast(task.getException().toString());
                                 //예외 처리 필요
                             }
@@ -106,21 +106,21 @@ public class SignupActivity extends AppCompatActivity {
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
     }
+
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             currentUser.reload();
         }
     }
 
     private void startToast(String msg) {
-        Toast.makeText(this, msg , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void myStartActivity(Class c) {
+    private void myStartActivity() {
         Intent intent = new Intent(SignupActivity.this, SetProfileActivity.class);
         startActivity(intent);
     }

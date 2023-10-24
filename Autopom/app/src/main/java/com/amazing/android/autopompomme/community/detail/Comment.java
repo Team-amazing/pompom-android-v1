@@ -1,7 +1,5 @@
 package com.amazing.android.autopompomme.community.detail;
 
-import android.net.Uri;
-
 public class Comment {
     private String userId;
     private String comment;

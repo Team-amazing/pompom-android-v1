@@ -17,32 +17,18 @@ import java.util.List;
 
 public class WriteAdapter extends RecyclerView.Adapter<WriteAdapter.ViewHolder> {
 
-    private Context context;
-    private List<Uri> imgUrls;
+    private final Context context;
+    private final List<Uri> imgUrls;
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView imageView;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            imageView = itemView.findViewById(R.id.iv_write_img);
-        }
-
-        public ImageView getImageView() {
-            return imageView;
-        }
-    }
-
-    public WriteAdapter (Context context, List<Uri> imgUrls){
+    public WriteAdapter(Context context, List<Uri> imgUrls) {
         this.context = context;
         this.imgUrls = imgUrls;
     }
+
     @NonNull
     @Override
     public WriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.write_img_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.write_img_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -58,5 +44,20 @@ public class WriteAdapter extends RecyclerView.Adapter<WriteAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return imgUrls.size();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView imageView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            imageView = itemView.findViewById(R.id.iv_write_img);
+        }
+
+        public ImageView getImageView() {
+            return imageView;
+        }
     }
 }

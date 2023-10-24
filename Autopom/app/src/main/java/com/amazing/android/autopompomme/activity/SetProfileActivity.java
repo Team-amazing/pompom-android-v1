@@ -1,14 +1,11 @@
 package com.amazing.android.autopompomme.activity;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -62,14 +59,12 @@ public class SetProfileActivity extends AppCompatActivity {
         checkSelfPermission();
 
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        //Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
 
         intent.setType("image/*");
-        if(intent.resolveActivity(getPackageManager()) != null) {
-            //startActivityForResult(intent, GALLERY_REQUEST_CODE);
-            startActivityForResult(Intent.createChooser(intent,"Select File"),GALLERY_REQUEST_CODE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(Intent.createChooser(intent, "Select File"), GALLERY_REQUEST_CODE);
         }
     }
 
@@ -77,51 +72,37 @@ public class SetProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(resultCode, resultCode, data);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        //Uri photoUrl = user.getPhotoUrl();
-
         ImageView imageView = binding.ivSetProfile;
 
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             uri = data.getData();
             String[] filePathColum = {MediaStore.Images.Media.DATA};
-            //Cursor cursor = getContentResolver().query(uri, filePathColum, null, null, null);
 
             Cursor cursor = getContentResolver().query(uri, filePathColum, null, null, null);
-
             cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColum[0]);
-            String imagePath = cursor.getString(columnIndex);
             cursor.close();
 
             imageView.setImageURI(uri);
-            //imageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
 
             imageChange = true;
-
         }
     }
 
     public void checkSelfPermission() {
-        Log.d("TEST","ss");
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("TEST","하용 안됨");
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                Log.d("TEST","dd");
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("TEST", "하용 안됨");
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 Toast.makeText(this, "외부 저장소 사용을 위해 읽기/쓰기 필요", Toast.LENGTH_SHORT).show();
             }
-            Log.d("TEST","요청");
+            Log.d("TEST", "요청");
             ActivityCompat.requestPermissions(this, new String[]
-                    {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
-        }else {
-            Log.d("TEST","하용 됨");
+                    {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+        } else {
+            Log.d("TEST", "하용 됨");
         }
 
     }
-
-
 
     private void nicknameCheck() {
         String nickName = binding.etSetProfile.getText().toString();
@@ -141,28 +122,28 @@ public class SetProfileActivity extends AppCompatActivity {
                                     //Log.d(TAG, "Nickname is available.");
                                     binding.tvSetProfileNotAble.setVisibility(View.GONE);
                                     binding.tvSetProfileAble.setVisibility(View.VISIBLE);
+                                    binding.tvSetProfileNoIn.setVisibility(View.GONE);
                                     nickNameAble = true;
-                                    //saveData(db, nickName);
                                 } else {
                                     // 검색된 문서가 있으므로, 해당 닉네임은 이미 사용 중
                                     //Log.d(TAG, "Nickname is already in use.");
                                     binding.tvSetProfileAble.setVisibility(View.GONE);
                                     binding.tvSetProfileNotAble.setVisibility(View.VISIBLE);
+                                    binding.tvSetProfileNoIn.setVisibility(View.GONE);
                                     nickNameAble = false;
                                 }
                             } else {
-                                //Log.w(TAG, "Error getting documents.", task.getException());
+                                Log.w("TEST", "Error getting documents.", task.getException());
                             }
                         }
                     });
-
-
         } else {
             //닉네임 입력 안할 시 처리
+            binding.tvSetProfileNoIn.setVisibility(View.VISIBLE);
+            binding.tvSetProfileAble.setVisibility(View.GONE);
+            binding.tvSetProfileNotAble.setVisibility(View.GONE);
         }
-
     }
-
 
     private void saveData() {
         String nickName = binding.etSetProfile.getText().toString();
@@ -172,8 +153,7 @@ public class SetProfileActivity extends AppCompatActivity {
 
         UserProfileChangeRequest profileUpdates;
 
-        Log.d("TEST","dd/"+uri);
-        MemberInfo memberInfo = new MemberInfo(nickName,uri.toString(),0);
+        MemberInfo memberInfo = new MemberInfo(nickName, uri.toString(), 0);
 
         if (user != null) {
             db.collection("users").document(user.getUid()).set(memberInfo)
@@ -192,13 +172,13 @@ public class SetProfileActivity extends AppCompatActivity {
                         }
                     });
 
-            if(imageChange) {
+            if (imageChange) {
                 profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(nickName)
                         .setPhotoUri(uri)
                         .build();
 
-            }else {
+            } else {
                 profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(nickName)
                         .build();
@@ -212,7 +192,6 @@ public class SetProfileActivity extends AppCompatActivity {
                                 Intent intent = new Intent(SetProfileActivity.this, LinkingActivity.class);
                                 startActivity(intent);
                                 //프로필 정보 업데이트 성공 로직
-                                //Log.d(TAG, "User profile updated.");
                             }
                         }
                     });

@@ -6,7 +6,8 @@ public class MyPlantList {
     private String plantBirth;
     private String plantImgUri;
 
-    public MyPlantList() {}
+    public MyPlantList() {
+    }
 
     public String getPlantSpecies() {
         return plantSpecies;

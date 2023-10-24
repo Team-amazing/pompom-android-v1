@@ -1,11 +1,5 @@
 package com.amazing.android.autopompomme.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,10 +8,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.amazing.android.autopompomme.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.amazing.android.autopompomme.databinding.ActivityEditInfoBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,10 +27,9 @@ import java.util.Objects;
 
 public class EditInfoActivity extends AppCompatActivity {
 
+    private static final int GALLERY_REQUEST_CODE = 1;
     ActivityEditInfoBinding binding;
     private FirebaseUser user;
-    private static final int GALLERY_REQUEST_CODE = 1;
-
     private String baseNickName;
     private String baseEmail;
     private Uri baseProfileUri;
@@ -49,13 +46,11 @@ public class EditInfoActivity extends AppCompatActivity {
         setBaseData();
         editImg();
         upDateProfile();
-
-        Log.d("TEST",binding.etEditInfoNickName.getText().toString());
     }
 
     private void upDateProfile() {
         binding.tvEditInfoComplete.setOnClickListener(v -> {
-            if(!Objects.equals(baseNickName, binding.etEditInfoNickName.getText().toString()) ||
+            if (!Objects.equals(baseNickName, binding.etEditInfoNickName.getText().toString()) ||
                     !Objects.equals(baseEmail, binding.etEditInfoEmail.getText().toString()) || baseProfileUri != profileUri) {
 
                 //변경사항 있음
@@ -69,7 +64,7 @@ public class EditInfoActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Log.d("TEST","닉네임 사진 변경 성공");
+                                    Log.d("TEST", "닉네임 사진 변경 성공");
                                 }
                             }
                         });
@@ -79,14 +74,14 @@ public class EditInfoActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Log.d("TEST","이메일 변경 성공");
+                                    Log.d("TEST", "이메일 변경 성공");
                                 }
                             }
                         });
 
-                Toast.makeText(getBaseContext(),"정보가 수정되었습니다",Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(getBaseContext(),"변경 사항이 없습니다",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "정보가 수정되었습니다", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getBaseContext(), "변경 사항이 없습니다", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -107,10 +102,10 @@ public class EditInfoActivity extends AppCompatActivity {
     }
 
     private void editImg() {
-        binding.ibEditInfoEdit.setOnClickListener( v -> openGallery());
+        binding.ibEditInfoEdit.setOnClickListener(v -> openGallery());
     }
 
-    public void openGallery(){
+    public void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, GALLERY_REQUEST_CODE);
     }
@@ -119,10 +114,10 @@ public class EditInfoActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             profileUri = data.getData();
             String[] filePathColum = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(profileUri,filePathColum,null,null,null);
+            Cursor cursor = getContentResolver().query(profileUri, filePathColum, null, null, null);
             cursor.moveToFirst();
 
             cursor.close();

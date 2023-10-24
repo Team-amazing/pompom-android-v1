@@ -10,8 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.amazing.android.autopompomme.R;
-import com.amazing.android.autopompomme.databinding.ActivityMainBinding;
 import com.amazing.android.autopompomme.community.CommunityFragment;
+import com.amazing.android.autopompomme.databinding.ActivityMainBinding;
 import com.amazing.android.autopompomme.fragment.FunctionFragment;
 import com.amazing.android.autopompomme.home.HomeFragment;
 import com.amazing.android.autopompomme.profile.ProfileFragment;
@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private final FunctionFragment functionFragment = new FunctionFragment();
     private final CommunityFragment communityFragment = new CommunityFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
+    public static Context context;
     ActivityMainBinding binding;
     private FragmentManager fragmentManager;
     private Map<Integer, Fragment> fragments;
-    public static Context context;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -47,17 +47,14 @@ public class MainActivity extends AppCompatActivity {
         fragments = new HashMap<>();
 
         initializeFragments();
-
         initBottomNavigation();
 
         userData();
-
     }
 
     private void userData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-
             String userId = user.getUid();
 
             sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
@@ -65,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("userId", userId);
             editor.apply();
-
         }
     }
 
@@ -88,27 +84,8 @@ public class MainActivity extends AppCompatActivity {
             if (fragment != null) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-
                 transaction.replace(R.id.containers, fragment)
                         .commit();
-            /*if (fragment != null) {
-                FragmentManager childFragmentManager = fragment.getChildFragmentManager();
-
-                if(fragment.isAdded()){
-                    FragmentTransaction transaction = childFragmentManager.beginTransaction();
-                    transaction.replace(R.id.containers, fragment)
-                            .commit();
-                }
-
-
-                /*if (fragment instanceof HomeFragment) {
-                    fragment.getChildFragmentManager().beginTransaction().replace(R.id.containers, fragment)
-                            //.addToBackStack(null)
-                            .commit();
-                } else {
-                    transaction.replace(R.id.containers, fragment)
-                            .commit();
-                }*/
                 return true;
             }
             return false;
