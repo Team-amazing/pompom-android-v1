@@ -1,8 +1,10 @@
-package com.amazing.android.autopompomme;
+package com.amazing.android.autopompomme.alarm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.amazing.android.autopompomme.R;
 
 public class AlarmActivity extends AppCompatActivity {
 
