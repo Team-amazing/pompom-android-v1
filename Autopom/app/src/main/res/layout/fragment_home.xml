@@ -29,6 +29,7 @@
             android:layout_marginStart="8dp"/>
 
         <ImageView
+            android:id="@+id/iv_home_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_notifications_none_24"
