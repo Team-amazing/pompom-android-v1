@@ -1,5 +1,7 @@
 package com.amazing.android.autopompomme.community;
 
+import android.util.Log;
+
 import java.util.List;
 
 public class CommunityList {
@@ -14,6 +16,17 @@ public class CommunityList {
     private int commentNum;
 
     public CommunityList() {
+        Log.d("TEST","sda"+profileUri);
+    }
+
+    public CommunityList(String postId, String profileName, String profileUri, String date, String title, List<String> postUri, String content){
+        this.postId = postId;
+        this.profileName = profileName;
+        this.profileUri = profileUri;
+        this.date = date;
+        this.title = title;
+        this.postUri = postUri;
+        this.content = content;
     }
 
     public String getPostId() {
@@ -25,6 +38,7 @@ public class CommunityList {
     }
 
     public String getProfileName() {
+        Log.d("TEST","sssss"+profileName);
         return profileName;
     }
 
@@ -33,6 +47,7 @@ public class CommunityList {
     }
 
     public String getProfileUri() {
+        Log.d("TEST","dsfsd"+profileUri);
         return profileUri;
     }
 

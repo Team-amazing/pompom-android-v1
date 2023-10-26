@@ -1,6 +1,7 @@
 package com.amazing.android.autopompomme.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.activity.MainActivity;
+import com.amazing.android.autopompomme.alarm.AlarmActivity;
 import com.amazing.android.autopompomme.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -85,6 +87,11 @@ public class HomeFragment extends Fragment {
                 }
             }
 
+        });
+
+        binding.ivHomeAlarm.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AlarmActivity.class);
+            startActivity(intent);
         });
 
         HomeFragment homeFragment = this;
