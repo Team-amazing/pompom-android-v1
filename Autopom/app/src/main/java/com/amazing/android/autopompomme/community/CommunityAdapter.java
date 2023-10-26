@@ -1,6 +1,7 @@
 package com.amazing.android.autopompomme.community;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,6 +103,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         likeNum = arrayList.get(position).getLikeNum();
         postId = arrayList.get(position).getPostId();
 
+        Log.d("TEST","vm"+arrayList.get(position).getProfileUri());
         initLike(holder);
         holder.btnNoLike.setOnClickListener(v -> {
             noLike(holder);
