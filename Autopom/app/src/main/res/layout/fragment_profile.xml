@@ -91,6 +91,9 @@
                 android:text="식물 도감"
                 android:fontFamily="@font/ibm_medium"
                 android:layout_marginTop="25dp"
+                android:drawableTop="@drawable/careAi"
+                android:paddingTop="10dp"
+                android:textColor="@color/light_black"
                 app:layout_constraintTop_toBottomOf="@id/iv_profile_line"
                 app:layout_constraintStart_toStartOf="@id/iv_profile_line"
                 app:layout_constraintEnd_toStartOf="@id/btn_profile_ranking"/>
