@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -94,10 +95,17 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         });
 
-        HomeFragment homeFragment = this;
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         SharedPreferences data = MainActivity.context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String userId = data.getString("userId", "default value");
+
+        HomeFragment homeFragment = this;
 
         db.collection("register")
                 .whereEqualTo("uid", userId)
@@ -119,6 +127,5 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
-        return binding.getRoot();
     }
 }
