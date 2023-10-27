@@ -16,12 +16,13 @@ import java.util.List;
 public class MyPlantAdapter extends FragmentStateAdapter {
 
     //private final List<Fragment> fragments;
-    private ArrayList<MyPlantList> arrayList;
+    private final ArrayList<MyPlantList> arrayList;
 
     public MyPlantAdapter(HomeFragment fa,ArrayList<MyPlantList> arrayList) {
         super(fa);
 
         this.arrayList = arrayList;
+
 //        fragments = new ArrayList<>();
 //        fragments.add(new AddPlantFragment());
 //        fragments.add(new MyPlantFragment());
