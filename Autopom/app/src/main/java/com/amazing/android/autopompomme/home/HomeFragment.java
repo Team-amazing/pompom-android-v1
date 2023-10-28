@@ -20,6 +20,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.activity.MainActivity;
 import com.amazing.android.autopompomme.alarm.AlarmActivity;
+import com.amazing.android.autopompomme.alarm.AlarmService;
 import com.amazing.android.autopompomme.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,10 +46,18 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater);
+
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         db = FirebaseFirestore.getInstance();
         arrayList = new ArrayList<>();
@@ -71,9 +80,9 @@ public class HomeFragment extends Fragment {
         CompositePageTransformer transform = new CompositePageTransformer();
         transform.addTransformer(new MarginPageTransformer(8));
 
-        transform.addTransformer((view, fl) -> {
+        transform.addTransformer((vieww, fl) -> {
             float v = 1 - Math.abs(fl);
-            view.setScaleY(scaleFactor);
+            vieww.setScaleY(scaleFactor);
         });
 
         viewPager.setPageTransformer(new ViewPager2.PageTransformer() {
@@ -95,17 +104,12 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         });
 
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
         SharedPreferences data = MainActivity.context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String userId = data.getString("userId", "default value");
 
-        HomeFragment homeFragment = this;
+        plantAdapter = new MyPlantAdapter(getChildFragmentManager(), getLifecycle(), new ArrayList<>());
+        viewPager.setAdapter(plantAdapter);
 
         db.collection("register")
                 .whereEqualTo("uid", userId)
@@ -120,8 +124,8 @@ public class HomeFragment extends Fragment {
                                 MyPlantList data = document.toObject(MyPlantList.class);
                                 arrayList.add(data);
                             }
-                            plantAdapter = new MyPlantAdapter(homeFragment, arrayList);
-                            viewPager.setAdapter(plantAdapter);
+                            plantAdapter.setMyPlantList(arrayList);
+                            plantAdapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(getContext(), "정보를 불러오지 못했습니다", Toast.LENGTH_SHORT).show();
                         }
