@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -148,13 +149,16 @@ public class DetailActivity extends AppCompatActivity {
         dbRef.child("comments").child(postId).child(userId).setValue(comment);
         updateRankingScore();
         Log.d("TEST", "댓글 작성");
+
+        InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+        binding.etDetailComment.setText(null);
     }
 
     private String getTime() {
         long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        return sdf.format(date);
+        return ""+now;
     }
 
     private void readComment() {
