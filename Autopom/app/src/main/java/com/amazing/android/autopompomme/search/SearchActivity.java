@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.amazing.android.autopompomme.databinding.ActivitySearchBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +45,7 @@ public class SearchActivity extends AppCompatActivity {
         binding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        initToolbar();
         ObjectDetectorOptions options =
                 new ObjectDetectorOptions.Builder()
                         .setDetectorMode(ObjectDetectorOptions.SINGLE_IMAGE_MODE) //STREAM_MODE
@@ -98,6 +101,15 @@ public class SearchActivity extends AppCompatActivity {
                                 }
                             });
         });
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = binding.tbSearch;
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
