@@ -32,9 +32,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
@@ -48,7 +46,6 @@ public class DetailActivity extends AppCompatActivity {
     private Uri myProfileUri;
     private List<Comment> commentList;
     private CommentAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +63,6 @@ public class DetailActivity extends AppCompatActivity {
         dbRef = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
 
-
         Intent intent = getIntent();
 
         String title = intent.getExtras().getString("title");
@@ -74,8 +70,6 @@ public class DetailActivity extends AppCompatActivity {
         String profileName = intent.getExtras().getString("profileName");
         String time = intent.getExtras().getString("time");
         String content = intent.getExtras().getString("content");
-        //int likeNum = Integer.parseInt(intent.getExtras().getString("likeNum"));
-        //int commentNum = Integer.parseInt(intent.getExtras().getString("commentNum"));
         List<String> postImg = intent.getStringArrayListExtra("postImg");
         postId = intent.getExtras().getString("postId");
         userId = intent.getExtras().getString("userId");
@@ -89,7 +83,6 @@ public class DetailActivity extends AppCompatActivity {
         binding.tvDetailTime.setText(time);
         binding.tvDetailContent.setText(content);
 
-        Log.d("TEST", "f" + myProfileUri);
         //binding.ivDetailComment.setImageURI(myProfileUri);
         Glide.with(getBaseContext())
                 .load(myProfileUri)
@@ -103,14 +96,11 @@ public class DetailActivity extends AppCompatActivity {
         RecyclerView rvComment = binding.rvDetailComment;
         rvComment.setLayoutManager(new LinearLayoutManager(this));
 
-
-        //writeComment();
         binding.ibDetailSend.setOnClickListener(v -> writeComment());
 
         commentList = new ArrayList<>();
         adapter = new CommentAdapter(commentList);
         rvComment.setAdapter(adapter);
-
     }
 
     private void getUserData() {
@@ -136,16 +126,10 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void writeComment() {
-        String commentId = dbRef.child("comments").child(postId).push().getKey();
-
         String commentText = binding.etDetailComment.getText().toString();
 
-        //Comment comment = new Comment(profileName,commentText,getTime());
         Comment comment = new Comment(myNickName, commentText, getTime(), myProfileUri.toString());
-        //dbRef.child(commentId).setValue(comment);
 
-
-        //dbRef.setValue(comment);
         dbRef.child("comments").child(postId).child(userId).setValue(comment);
         updateRankingScore();
         Log.d("TEST", "댓글 작성");
@@ -158,27 +142,17 @@ public class DetailActivity extends AppCompatActivity {
 
     private String getTime() {
         long now = System.currentTimeMillis();
-        return ""+now;
+        return "" + now;
     }
 
     private void readComment() {
         dbRef.child("comments").child(postId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("TEST", "q" + snapshot);
-                Log.d("TEST", "a" + snapshot.getChildren());
-
-                //commentList.add(snapshot.getValue(Comment.class));
                 for (DataSnapshot commentSnapshot : snapshot.getChildren()) {
                     Comment comment = commentSnapshot.getValue(Comment.class);
-                    Log.d("TEST", "c" + commentSnapshot.getChildren());
-
-                    Log.d("TEST", "x" + commentSnapshot);
-                    Log.d("TEST", "s" + comment.getComment());
                     commentList.add(comment);
                 }
-                Log.d("TEST", "list" + commentList);
-
                 adapter.notifyDataSetChanged();
             }
 
