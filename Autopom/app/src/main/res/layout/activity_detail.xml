@@ -149,84 +149,15 @@
                 app:layout_constraintStart_toStartOf="@id/tv_detail_content"/>
 
             <ImageView
-                android:id="@+id/iv_detail_line1"
-                android:layout_width="340dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="20dp"
+                android:id="@+id/iv_detail_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/radius"
                 android:backgroundTint="@color/light_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_detail_img"/>
-
-            <TextView
-                android:id="@+id/tv_detail_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="138명이 하트를 보냈어요"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginTop="12dp"
-                app:layout_constraintLeft_toLeftOf="@id/iv_detail_line1"
-                app:layout_constraintTop_toBottomOf="@id/iv_detail_line1"/>
-
-            <TextView
-                android:id="@+id/tv_detail_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="댓글 42개"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                android:layout_marginTop="3dp"
-                app:layout_constraintLeft_toLeftOf="@id/iv_detail_line1"
-                app:layout_constraintTop_toBottomOf="@id/tv_detail_like"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_detail_defaultLike"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:text="좋아요"
-                android:drawableLeft="@drawable/baseline_favorite_border_24"
-                android:paddingLeft="7dp"
-                android:paddingRight="7dp"
-                android:background="@drawable/like_background"
-                android:textColor="@color/main2"
-                android:textSize="10sp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:visibility="visible"
-                app:layout_constraintRight_toRightOf="@id/iv_detail_line1"
-                app:layout_constraintTop_toBottomOf="@id/iv_detail_line1" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_detail_like"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:text="좋아요"
-                android:drawableLeft="@drawable/baseline_favorite_24"
-                android:paddingLeft="7dp"
-                android:paddingRight="7dp"
-                android:background="@drawable/radius"
-                android:backgroundTint="@color/main2"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:visibility="gone"
-                app:layout_constraintRight_toRightOf="@id/iv_detail_line1"
-                app:layout_constraintTop_toBottomOf="@id/iv_detail_line1" />
-
-            <ImageView
-                android:id="@+id/iv_detail_line2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/radius"
-                android:backgroundTint="@color/light_gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_detail_comment"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_detail_comment"
