@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".search.SearchActivity">
 
-
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_search"
         android:layout_width="match_parent"
