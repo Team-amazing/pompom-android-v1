@@ -71,11 +71,38 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
 
         public void setTime(Comment comment) {
-            time.setText(comment.getTimestamp());
+            time.setText(formatTimeString(comment.getTimestamp()));
         }
 
         public void setComment(Comment commentList) {
             comment.setText(commentList.getComment());
         }
+    }
+
+    private static String formatTimeString(String regTime) {
+
+        int SEC = 60;
+        int MIN = 60;
+        int HOUR = 24;
+        int DAY = 30;
+        int MONTH = 12;
+
+        long curTime = System.currentTimeMillis();
+        long diffTime = (curTime - Long.parseLong(regTime)) / 1000;
+        String msg = null;
+        if (diffTime < SEC) {
+            msg = "방금 전";
+        } else if ((diffTime /= SEC) < MIN) {
+            msg = diffTime + "분 전";
+        } else if ((diffTime /= MIN) < HOUR) {
+            msg = (diffTime) + "시간 전";
+        } else if ((diffTime /= HOUR) < DAY) {
+            msg = (diffTime) + "일 전";
+        } else if ((diffTime /= DAY) < MONTH) {
+            msg = (diffTime) + "달 전";
+        } else {
+            msg = (diffTime) + "년 전";
+        }
+        return msg;
     }
 }
