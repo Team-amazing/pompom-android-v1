@@ -1,7 +1,6 @@
 package com.amazing.android.autopompomme.community;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -39,6 +43,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
 
     private final ArrayList<CommunityList> arrayList;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
     private final String userId;
     private int likeNum;
     private Timer timer;
@@ -94,16 +99,21 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getProfileUri())
                 .into(holder.profileImg);
+        likeNum = arrayList.get(position).getLikeNum();
+        postId = arrayList.get(position).getPostId();
         holder.profileName.setText(arrayList.get(position).getProfileName());
         holder.date.setText(formatTimeString(arrayList.get(position).getDate()));
         holder.title.setText(arrayList.get(position).getTitle());
         holder.detail.setText(arrayList.get(position).getContent());
         holder.tvLike.setText(arrayList.get(position).getLikeNum() + "명이 하트를 보냈어요");
-        holder.comment.setText("댓글 " + arrayList.get(position).getCommentNum() + "개");
-        likeNum = arrayList.get(position).getLikeNum();
-        postId = arrayList.get(position).getPostId();
+        getCommentNum(new CommentNumCallback() {
+            @Override
+            public void onCallback(long commentNum) {
+                holder.comment.setText("댓글 " + commentNum + "개");
+            }
+        });
 
-        Log.d("TEST","vm"+arrayList.get(position).getProfileUri());
+        Log.d("TEST", "vm" + arrayList.get(position).getProfileUri());
         initLike(holder);
         holder.btnNoLike.setOnClickListener(v -> {
             noLike(holder);
@@ -259,9 +269,32 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                 });
     }
 
+    private void getCommentNum(CommentNumCallback callback) {
+        dbRef.child("comments").child(postId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                long commentNum = 0;
+
+                if (dataSnapshot.exists()) {
+                    commentNum = dataSnapshot.getChildrenCount();
+                }
+                callback.onCallback(commentNum);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                callback.onCallback(0);
+            }
+        });
+    }
+
     @Override
     public int getItemCount() {
         return arrayList != null ? arrayList.size() : 0;
+    }
+
+    public interface CommentNumCallback {
+        void onCallback(long commentNum);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

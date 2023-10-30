@@ -8,7 +8,8 @@
         android:id="@+id/iv_comment_profile"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@color/light_gray"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/light_gray"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,17 +54,5 @@
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@id/tv_comment_name"
         app:layout_constraintTop_toBottomOf="@id/tv_comment_name"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="답글 달기"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/comment_gray"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@id/tv_comment_comment"
-        app:layout_constraintTop_toBottomOf="@id/tv_comment_comment"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.amazing.android.autopompomme.home.HomeFragment;
@@ -18,15 +20,20 @@ public class MyPlantAdapter extends FragmentStateAdapter {
     //private final List<Fragment> fragments;
     private ArrayList<MyPlantList> arrayList;
 
-    public MyPlantAdapter(HomeFragment fa,ArrayList<MyPlantList> arrayList) {
-        super(fa);
+    public MyPlantAdapter(FragmentManager fa, Lifecycle lifecycle, ArrayList<MyPlantList> arrayList) {
+        super(fa,lifecycle);
 
         this.arrayList = arrayList;
+
 //        fragments = new ArrayList<>();
 //        fragments.add(new AddPlantFragment());
 //        fragments.add(new MyPlantFragment());
 //        fragments.add(new MyPlantFragment());
         Log.d("TEST","al/"+arrayList);
+    }
+
+    public void setMyPlantList(ArrayList<MyPlantList> newPlantList) {
+        this.arrayList = newPlantList;
     }
 
     @NonNull

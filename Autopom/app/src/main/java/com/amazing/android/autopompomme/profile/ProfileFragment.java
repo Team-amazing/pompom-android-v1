@@ -19,6 +19,7 @@ import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.activity.SettingActivity;
 import com.amazing.android.autopompomme.databinding.FragmentProfileBinding;
 import com.amazing.android.autopompomme.ranking.RankingActivity;
+import com.amazing.android.autopompomme.search.SearchActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -74,6 +75,11 @@ public class ProfileFragment extends Fragment {
 
         binding.btnProfileRanking.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), RankingActivity.class);
+            startActivity(intent);
+        });
+
+        binding.btnProfilePlantBook.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
             startActivity(intent);
         });
     }
