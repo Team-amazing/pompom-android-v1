@@ -19,8 +19,6 @@ import com.amazing.android.autopompomme.databinding.FragmentCommunityBinding;
 import com.amazing.android.autopompomme.write.WriteActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -77,6 +75,7 @@ public class CommunityFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("TEST", document.getId() + " => " + document.getData());
                                 CommunityList data = document.toObject(CommunityList.class);
+                                data.setProfileUri(String.valueOf(document.get("profileUri")));
                                 data.setPostId(document.getId());
                                 arrayList.add(data);
                             }
@@ -85,7 +84,6 @@ public class CommunityFragment extends Fragment {
 
                             CommunityAdapter communityAdapter = new CommunityAdapter(arrayList, userId);
                             recyclerView.setAdapter(communityAdapter);
-
                         } else {
                             Log.d("TEST", "Error getting documents: ", task.getException());
                         }
