@@ -12,10 +12,10 @@ import com.amazing.android.autopompomme.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MyLikeFragment#newInstance} factory method to
+ * Use the {@link MyPamFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyLikeFragment extends Fragment {
+public class MyPamFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class MyLikeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MyLikeFragment() {
+    public MyPamFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class MyLikeFragment extends Fragment {
      * @return A new instance of fragment MyLikeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MyLikeFragment newInstance(String param1, String param2) {
-        MyLikeFragment fragment = new MyLikeFragment();
+    public static MyPamFragment newInstance(String param1, String param2) {
+        MyPamFragment fragment = new MyPamFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
