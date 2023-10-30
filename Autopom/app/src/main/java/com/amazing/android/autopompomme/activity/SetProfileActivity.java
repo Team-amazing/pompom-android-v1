@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.api.MemberInfo;
 import com.amazing.android.autopompomme.databinding.ActivitySetProfileBinding;
 import com.amazing.android.autopompomme.linking.LinkingActivity;
@@ -48,11 +50,18 @@ public class SetProfileActivity extends AppCompatActivity {
 
         binding.ivSetProfileSelect.setOnClickListener(v -> openGallery());
         binding.btnSetProfile.setOnClickListener(v -> nicknameCheck());
-        binding.tvSetProfileNext.setOnClickListener(v -> {
-            if (nickNameAble) {
-                saveData();
-            }
-        });
+        nextBtnClick();
+    }
+
+    private void nextBtnClick() {
+        if(nickNameAble && imageChange) {
+            binding.tvSetProfileNext.setClickable(true);
+            binding.tvSetProfileNext.setTextColor(Color.BLACK);
+            binding.tvSetProfileNext.setOnClickListener(view -> saveData());
+        }else {
+            binding.tvSetProfileNext.setClickable(false);
+            binding.tvSetProfileNext.setTextColor(Color.GRAY);
+        }
     }
 
     private void openGallery() {
@@ -101,7 +110,6 @@ public class SetProfileActivity extends AppCompatActivity {
         } else {
             Log.d("TEST", "하용 됨");
         }
-
     }
 
     private void nicknameCheck() {
@@ -172,26 +180,23 @@ public class SetProfileActivity extends AppCompatActivity {
                         }
                     });
 
-            if (imageChange) {
-                profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(nickName)
-                        .setPhotoUri(uri)
-                        .build();
+            profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(nickName)
+                    .setPhotoUri(uri)
+                    .build();
 
-            } else {
-                profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(nickName)
-                        .build();
-            }
+            //profileUpdates = new UserProfileChangeRequest.Builder()
+            //        .setDisplayName(nickName)
+            //        .build();
 
             user.updateProfile(profileUpdates)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+                                //프로필 정보 업데이트 성공 로직
                                 Intent intent = new Intent(SetProfileActivity.this, LinkingActivity.class);
                                 startActivity(intent);
-                                //프로필 정보 업데이트 성공 로직
                             }
                         }
                     });
