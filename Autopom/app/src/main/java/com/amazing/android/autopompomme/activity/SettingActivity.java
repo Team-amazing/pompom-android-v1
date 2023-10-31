@@ -1,12 +1,15 @@
 package com.amazing.android.autopompomme.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.amazing.android.autopompomme.alarm.AlarmService;
 import com.amazing.android.autopompomme.databinding.ActivitySettingBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +42,47 @@ public class SettingActivity extends AppCompatActivity {
         editInfo();
         logOut();
         deleteUser();
+        initAlarm();
+        alarmSwitch();
         binding.tvSettingVersionNumber.setText(getVersionInfo(getBaseContext()));
+    }
+
+    private void alarmSwitch() {
+        binding.switchSettingAlarm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    Log.d("TEST", "aa");
+                    enableNotification();
+                } else {
+                    disableNotification();
+                }
+            }
+        });
+    }
+
+    private void enableNotification() {
+        Intent intent = new Intent(this, AlarmService.class);
+        startService(intent);
+    }
+
+    private void disableNotification() {
+        Intent intent = new Intent(this, AlarmService.class);
+        stopService(intent);
+    }
+
+    private void initAlarm() {
+        binding.switchSettingAlarm.setChecked(isNotificationEnabled());
+    }
+
+    private boolean isNotificationEnabled() {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (AlarmService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void editInfo() {
