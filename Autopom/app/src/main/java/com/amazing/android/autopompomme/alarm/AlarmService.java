@@ -67,7 +67,7 @@ public class AlarmService extends Service {
                 Log.w("TEST", "Failed to read value.", error.toException());
             }
         });
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     private void sendNotification(String title, String messageBody) {
