@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class MyPamAdapter extends RecyclerView.Adapter<MyPamAdapter.ViewHolder> {
 
-    private ArrayList<MyPamList> arrayList;
+    private final ArrayList<MyPamList> arrayList;
 
     public MyPamAdapter (ArrayList<MyPamList> arrayList) {
         this.arrayList = arrayList;
@@ -51,9 +51,9 @@ public class MyPamAdapter extends RecyclerView.Adapter<MyPamAdapter.ViewHolder> 
                         .load(arrayList.get(position).getPlantImgUri())
                         .into(holder.imageView);
         //holder.imageView.setImageURI(Uri.parse(arrayList.get(position).getPlantImgUri()));
-        holder.species.setText("팜팜이 종 : "arrayList.get(position).getPlantSpecies());
-        holder.nick.setText("팜팜이 별명 : "arrayList.get(position).getPlantNickName());
-        holder.birth.setText("팜팜이 생일 : "arrayList.get(position).getPlantBirth());
+        holder.species.setText("팜팜이 종 : " + arrayList.get(position).getPlantSpecies());
+        holder.nick.setText("팜팜이 별명 : " + arrayList.get(position).getPlantNickName());
+        holder.birth.setText("팜팜이 생일 : " + arrayList.get(position).getPlantBirth());
     }
 
     @Override
