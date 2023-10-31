@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startAlarmService() {
         Intent intent = new Intent(this, AlarmService.class);
-        startForegroundService(intent);
+        startService(intent);
     }
 
     private void initAlarm() {
