@@ -2,7 +2,9 @@ package com.amazing.android.autopompomme.register;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -39,6 +42,7 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final int GALLERY_REQUEST_CODE = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 2;
     ActivityRegisterBinding binding;
     private FirebaseFirestore db;
     private Uri plantImgUri;
@@ -174,10 +178,39 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setCameraImg() {
-        binding.ivRegisterSelect.setOnClickListener(v -> openGallery());
+        binding.ivRegisterSelect.setOnClickListener(v -> showPhotoSelectionDialog());
     }
 
-    public void openGallery() {
+    private void showPhotoSelectionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("사진 선택");
+        builder.setItems(new CharSequence[]{"사진 찍기", "갤러리에서 가져오기"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        // 사진 찍기를 선택한 경우
+                        dispatchTakePictureIntent();
+                        break;
+                    case 1:
+                        // 갤러리에서 가져오기를 선택한 경우
+                        openGallery();
+                        break;
+                }
+            }
+        });
+        builder.show();
+    }
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+            // display error state to the user
+        }
+    }
+
+    private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, GALLERY_REQUEST_CODE);
     }
@@ -186,6 +219,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Log.d("TEST","xxx"+resultCode);
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             plantImgUri = data.getData();
             String[] filePathColum = {MediaStore.Images.Media.DATA};
@@ -196,6 +230,16 @@ public class RegisterActivity extends AppCompatActivity {
 
             binding.ivRegisterSelect.setImageURI(plantImgUri);
             checkInEssential();
+        }
+
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            if(extras != null) {
+                Uri u = (Uri) extras.get("data");
+                Log.d("TEST","gg"+u);
+            }
+        }else {
+            
         }
     }
 
