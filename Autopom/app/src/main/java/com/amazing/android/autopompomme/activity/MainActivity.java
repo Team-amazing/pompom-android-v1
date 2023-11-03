@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.amazing.android.autopompomme.R;
-import com.amazing.android.autopompomme.alarm.AlarmActivity;
 import com.amazing.android.autopompomme.alarm.AlarmService;
 import com.amazing.android.autopompomme.community.CommunityFragment;
 import com.amazing.android.autopompomme.databinding.ActivityMainBinding;
