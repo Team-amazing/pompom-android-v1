@@ -21,6 +21,7 @@ public class MyPlantFragment extends Fragment {
 
     MyPlantList arrayList;
 
+    public MyPlantFragment() {}
     public MyPlantFragment(MyPlantList arrayList) {
         this.arrayList = arrayList;
     }
