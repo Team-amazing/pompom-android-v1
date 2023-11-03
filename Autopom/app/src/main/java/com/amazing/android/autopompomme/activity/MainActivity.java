@@ -17,7 +17,8 @@ import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.alarm.AlarmService;
 import com.amazing.android.autopompomme.community.CommunityFragment;
 import com.amazing.android.autopompomme.databinding.ActivityMainBinding;
-import com.amazing.android.autopompomme.fragment.FunctionFragment;
+import com.amazing.android.autopompomme.function.FunctionFragment;
+import com.amazing.android.autopompomme.function.WaterTankService;
 import com.amazing.android.autopompomme.home.HomeFragment;
 import com.amazing.android.autopompomme.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
     private void startAlarmService() {
         Intent intent = new Intent(this, AlarmService.class);
         startService(intent);
+
+        Intent water = new Intent(this, WaterTankService.class);
+        startService(water);
     }
 
     private void initAlarm() {
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         // Log and toast
                         String msg = getString(R.string.msg_token_fmt, token);
                         Log.d("TEST", msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
