@@ -46,9 +46,9 @@ public class AlarmService extends Service {
         Notification notification = createNotification();
         startForeground(1, notification);
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("careAi/hw/plantState");
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
-        db.addValueEventListener(new ValueEventListener() {
+        db.child("careAi/hw/plantState").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(Objects.requireNonNull(snapshot.getValue()).toString().equals("false")) {
@@ -67,6 +67,8 @@ public class AlarmService extends Service {
                 Log.w("TEST", "Failed to read value.", error.toException());
             }
         });
+
+
         return START_NOT_STICKY;
     }
 
