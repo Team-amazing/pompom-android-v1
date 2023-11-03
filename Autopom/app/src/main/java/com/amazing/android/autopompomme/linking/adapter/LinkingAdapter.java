@@ -1,14 +1,19 @@
 package com.amazing.android.autopompomme.linking.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazing.android.autopompomme.R;
@@ -73,6 +78,8 @@ public class LinkingAdapter extends RecyclerView.Adapter<LinkingAdapter.ViewHold
 
         LinkingDialog linkingDialog = new LinkingDialog(context, name,device,listener);
         holder.deviceName.setOnClickListener(v -> {
+            linkingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            linkingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             linkingDialog.show();
         });
     }
