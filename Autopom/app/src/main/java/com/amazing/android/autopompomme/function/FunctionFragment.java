@@ -6,9 +6,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import com.amazing.android.autopompomme.R;
 import com.amazing.android.autopompomme.databinding.FragmentFunctionBinding;
@@ -36,9 +38,10 @@ public class FunctionFragment extends Fragment {
 
         binding = FragmentFunctionBinding.inflate(getLayoutInflater());
 
-        dbRef = FirebaseDatabase.getInstance().getReference("Temp/hum");
+        dbRef = FirebaseDatabase.getInstance().getReference();
         initTemp();
         linkBlueTooth();
+        initControl();
 
         return binding.getRoot();
     }
@@ -51,15 +54,47 @@ public class FunctionFragment extends Fragment {
     }
 
     private void initTemp() {
-        dbRef.addValueEventListener(new ValueEventListener() {
+        dbRef.child("hardware/data").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 snapshot.getValue();
+                Log.d("TEST","dd"+snapshot);
+                Data data = snapshot.getValue(Data.class);
+                Log.d("TEST","a"+data.getHum());
+                binding.tvFunctionTmp.setText(data.getTem()+"");
+                binding.pbFunctionHum.setProgress(data.getHum());
+                binding.tvFunctionHum.setText(data.getHum()+"%");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void initControl() {
+        //dbRef.child("hardware/control").setValue();
+
+        binding.switchFunctionWater.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    dbRef.child("hardware/control").child("water").setValue(1);
+                }else {
+                    dbRef.child("hardware/control").child("water").setValue(0);
+                }
+            }
+        });
+
+        binding.switchFunctionLight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    dbRef.child("hardware/control").child("light").setValue(1);
+                }else {
+                    dbRef.child("hardware/control").child("light").setValue(0);
+                }
             }
         });
     }
