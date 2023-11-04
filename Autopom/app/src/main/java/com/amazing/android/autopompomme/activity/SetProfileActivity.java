@@ -54,14 +54,16 @@ public class SetProfileActivity extends AppCompatActivity {
     }
 
     private void nextBtnClick() {
-        if(nickNameAble && imageChange) {
-            binding.tvSetProfileNext.setClickable(true);
-            binding.tvSetProfileNext.setTextColor(Color.BLACK);
-            binding.tvSetProfileNext.setOnClickListener(view -> saveData());
-        }else {
-            binding.tvSetProfileNext.setClickable(false);
-            binding.tvSetProfileNext.setTextColor(Color.GRAY);
-        }
+        binding.tvSetProfileNext.setOnClickListener(view -> {
+            if(nickNameAble && imageChange) {
+                binding.tvSetProfileNext.setClickable(true);
+                binding.tvSetProfileNext.setTextColor(Color.BLACK);
+                binding.tvSetProfileNext.setOnClickListener(v -> saveData());
+            }else {
+                binding.tvSetProfileNext.setClickable(false);
+                binding.tvSetProfileNext.setTextColor(Color.GRAY);
+            }
+        });
     }
 
     private void openGallery() {
