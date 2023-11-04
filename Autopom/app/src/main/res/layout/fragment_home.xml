@@ -27,14 +27,6 @@
             android:layout_height="30dp"
             android:src="@drawable/pampam_icon"
             android:layout_marginStart="8dp"/>
-
-        <ImageView
-            android:id="@+id/iv_home_alarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_notifications_none_24"
-            android:layout_gravity="end"
-            android:layout_marginEnd="20dp"/>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.viewpager2.widget.ViewPager2

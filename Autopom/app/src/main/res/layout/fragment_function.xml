@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.FunctionFragment"
+    tools:context=".function.FunctionFragment"
     android:background="#EEEEEE">
 
     <ImageView
@@ -154,6 +154,7 @@
             android:layout_gravity="center"/>
 
         <Switch
+            android:id="@+id/switch_function_water"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:track="@drawable/function_switch_selector"
@@ -197,6 +198,7 @@
 
 
         <Switch
+            android:id="@+id/switch_function_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:track="@drawable/function_switch_selector"
@@ -248,6 +250,7 @@
             android:layout_gravity="center"/>
 
         <Switch
+            android:id="@+id/switch_function_waterTank_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:track="@drawable/function_switch_selector"

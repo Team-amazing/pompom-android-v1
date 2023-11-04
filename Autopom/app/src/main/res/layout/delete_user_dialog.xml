@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/radius"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="20dp"
+    android:backgroundTint="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정말 탈퇴 하시겠습니까?"
+        android:fontFamily="@font/ibm_medium"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="30dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_delete_dialog_cancel"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:textColor="@color/main1"
+            android:fontFamily="@font/ibm_medium"
+            android:layout_weight="1"
+            android:layout_marginEnd="7dp"
+            android:background="@drawable/setting_btn_back"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_delete_dialog_check"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="확인"
+            android:layout_weight="1"
+            android:fontFamily="@font/ibm_medium"
+            android:textColor="@color/white"
+            android:background="@drawable/radius_5"
+            android:backgroundTint="@color/main2"/>
+    </LinearLayout>
+</LinearLayout>

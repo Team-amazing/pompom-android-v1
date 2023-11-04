@@ -1,4 +1,4 @@
-package com.amazing.android.autopompomme.alarm;
+package com.amazing.android.autopompomme.function;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,9 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-public class AlarmService extends Service {
-
-
+public class WaterTankService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -35,40 +32,28 @@ public class AlarmService extends Service {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-
-    }
-
-    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         Notification notification = createNotification();
-        startForeground(1, notification);
+        startForeground(2, notification);
 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
-        db.child("careAi/hw/plantState").addValueEventListener(new ValueEventListener() {
+        db.child("hardware/alarm").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(Objects.requireNonNull(snapshot.getValue()).toString().equals("false")) {
-                    //sendNotification("Data Updated", "Data has been updated to: " + snapshot.getValue());
-
-                    //startForeground(1, notification);
-
+                if(Objects.requireNonNull(snapshot.getValue()).toString().equals("1")) {
                     String title = "팜팜이에게 질병이 감지되었습니다.";
                     String messageBody = "지금 바로 팜팜이를 돌보아주세요!!🤒";
-                    sendNotification(title,messageBody);
+                    sendNotification(title, messageBody);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("TEST", "Failed to read value.", error.toException());
+
             }
         });
-
-
         return START_NOT_STICKY;
     }
 
@@ -79,7 +64,7 @@ public class AlarmService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 
-        String channelId = "Default";
+        String channelId = "WaterTank";
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
@@ -105,7 +90,7 @@ public class AlarmService extends Service {
 
     private Notification createNotification() {
         // 알림 채널 설정
-        String channelId = "Default";
+        String channelId = "WaterTank";
         String channelName = "Foreground Service Channel";
         NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_NONE);
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
