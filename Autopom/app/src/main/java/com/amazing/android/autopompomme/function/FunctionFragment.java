@@ -1,18 +1,18 @@
-package com.amazing.android.autopompomme.fragment;
+package com.amazing.android.autopompomme.function;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
-import com.amazing.android.autopompomme.R;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.amazing.android.autopompomme.databinding.FragmentFunctionBinding;
 import com.amazing.android.autopompomme.linking.LinkingActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +26,7 @@ public class FunctionFragment extends Fragment {
 
     FragmentFunctionBinding binding;
     DatabaseReference dbRef;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,7 @@ public class FunctionFragment extends Fragment {
         initTemp();
         linkBlueTooth();
         initControl();
+        initAlarm();
 
         return binding.getRoot();
     }
@@ -58,12 +60,12 @@ public class FunctionFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 snapshot.getValue();
-                Log.d("TEST","dd"+snapshot);
+                Log.d("TEST", "dd" + snapshot);
                 Data data = snapshot.getValue(Data.class);
-                Log.d("TEST","a"+data.getHum());
-                binding.tvFunctionTmp.setText(data.getTem()+"");
+                Log.d("TEST", "a" + data.getHum());
+                binding.tvFunctionTmp.setText(data.getTem() + "");
                 binding.pbFunctionHum.setProgress(data.getHum());
-                binding.tvFunctionHum.setText(data.getHum()+"%");
+                binding.tvFunctionHum.setText(data.getHum() + "%");
             }
 
             @Override
@@ -79,10 +81,12 @@ public class FunctionFragment extends Fragment {
         binding.switchFunctionWater.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     dbRef.child("hardware/control").child("water").setValue(1);
-                }else {
+                    binding.switchFunctionWater.setChecked(true);
+                } else {
                     dbRef.child("hardware/control").child("water").setValue(0);
+                    binding.switchFunctionWater.setChecked(false);
                 }
             }
         });
@@ -90,12 +94,51 @@ public class FunctionFragment extends Fragment {
         binding.switchFunctionLight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     dbRef.child("hardware/control").child("light").setValue(1);
-                }else {
+                    binding.switchFunctionLight.setChecked(true);
+                } else {
                     dbRef.child("hardware/control").child("light").setValue(0);
+                    binding.switchFunctionLight.setChecked(false);
                 }
             }
         });
+
+        binding.switchFunctionWaterTankAlarm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    enableNotification();
+                } else {
+                    disableNotification();
+                }
+            }
+        });
+    }
+
+    private void enableNotification() {
+        Intent intent = new Intent(getContext(), WaterTankService.class);
+        requireActivity().startService(intent);
+        binding.switchFunctionWaterTankAlarm.setChecked(true);
+    }
+
+    private void disableNotification() {
+        Intent intent = new Intent(getContext(), WaterTankService.class);
+        requireActivity().stopService(intent);
+        binding.switchFunctionWaterTankAlarm.setChecked(false);
+    }
+
+    private void initAlarm() {
+        binding.switchFunctionWaterTankAlarm.setChecked(isNotificationEnabled());
+    }
+
+    private boolean isNotificationEnabled() {
+        ActivityManager manager = (ActivityManager) requireActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (WaterTankService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
