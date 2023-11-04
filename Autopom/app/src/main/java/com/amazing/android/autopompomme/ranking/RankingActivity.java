@@ -69,22 +69,22 @@ public class RankingActivity extends AppCompatActivity {
                         if (rankingList.size() == 1) {
                             MemberInfo first = rankingList.get(0);
 
-                            getUserData(first, binding.tvRankingFirstMan, binding.ivRankingFirst, binding.tvRankingFirstP);
+                            getUserData(first,binding.tvRankingFirstMan,binding.ivRankingFirst,binding.tvRankingFirstP);
                         } else if (rankingList.size() == 2) {
                             MemberInfo first = rankingList.get(0);
                             MemberInfo second = rankingList.get(1);
 
-                            getUserData(first, binding.tvRankingFirstMan, binding.ivRankingFirst, binding.tvRankingFirstP);
-                            getUserData(second, binding.tvRankingSecondMan, binding.ivRankingSecond, binding.tvRankingSecondP);
+                            getUserData(first,binding.tvRankingFirstMan,binding.ivRankingFirst,binding.tvRankingFirstP);
+                            getUserData(second,binding.tvRankingSecondMan,binding.ivRankingSecond,binding.tvRankingSecondP);
                         } else if (rankingList.size() == 3) {
                             MemberInfo first = rankingList.get(0);
                             MemberInfo second = rankingList.get(1);
                             MemberInfo third = rankingList.get(2);
 
-                            getUserData(first, binding.tvRankingFirstMan, binding.ivRankingFirst, binding.tvRankingFirstP);
-                            getUserData(second, binding.tvRankingSecondMan, binding.ivRankingSecond, binding.tvRankingSecondP);
-                            getUserData(third, binding.tvRankingThirdMan, binding.ivRankingThird, binding.tvRankingThirdP);
-                        } else {
+                            getUserData(first,binding.tvRankingFirstMan,binding.ivRankingFirst,binding.tvRankingFirstP);
+                            getUserData(second,binding.tvRankingSecondMan,binding.ivRankingSecond,binding.tvRankingSecondP);
+                            getUserData(third,binding.tvRankingThirdMan,binding.ivRankingThird,binding.tvRankingThirdP);
+                        }else {
                             List<MemberInfo> restUser = rankingList.subList(3, rankingList.size());
                             Log.d("TEST", "4위 부터 랭킹:" + restUser);
                         }
@@ -98,10 +98,10 @@ public class RankingActivity extends AppCompatActivity {
                 });
     }
 
-    private void getUserData(MemberInfo user, TextView name, ImageView imgUri, TextView scope) {
+    private void getUserData(MemberInfo user, TextView name, ImageView imgUri,TextView scope) {
         name.setText(user.getNickname());
         imgUri.setImageURI(Uri.parse(user.getUserUri()));
-        scope.setText(String.valueOf(user.getScore()) + "P");
+        scope.setText(String.valueOf(user.getScore())+ "P");
     }
 
     @SuppressLint("NonConstantResourceId")
